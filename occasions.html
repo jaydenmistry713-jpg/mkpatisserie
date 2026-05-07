@@ -1559,30 +1559,22 @@
             
             let sizeCount = 0;
             
-            // Add size options based on available prices (in order: Mini, Small, Large)
-            if (product.priceMini) {
+            // Build size options — support new sizes[] format and old priceMini/Small/Large format
+            const sizesData = product.sizes && product.sizes.length > 0
+                ? product.sizes
+                : [
+                    product.priceMini ? { name: 'Mini', price: product.priceMini } : null,
+                    product.priceSmall ? { name: 'Small', price: product.priceSmall } : null,
+                    product.priceLarge ? { name: 'Large', price: product.priceLarge } : null
+                  ].filter(Boolean);
+
+            sizesData.forEach(size => {
                 const option = document.createElement('option');
-                option.value = `Mini - £${product.priceMini}`;
-                option.textContent = `Mini - £${product.priceMini}`;
+                option.value = `${size.name} - £${parseFloat(size.price).toFixed(2)}`;
+                option.textContent = `${size.name} - £${parseFloat(size.price).toFixed(2)}`;
                 sizeSelect.appendChild(option);
                 sizeCount++;
-            }
-            
-            if (product.priceSmall) {
-                const option = document.createElement('option');
-                option.value = `Small - £${product.priceSmall}`;
-                option.textContent = `Small - £${product.priceSmall}`;
-                sizeSelect.appendChild(option);
-                sizeCount++;
-            }
-            
-            if (product.priceLarge) {
-                const option = document.createElement('option');
-                option.value = `Large - £${product.priceLarge}`;
-                option.textContent = `Large - £${product.priceLarge}`;
-                sizeSelect.appendChild(option);
-                sizeCount++;
-            }
+            });
             
             // If only one size, hide the size dropdown and auto-select it
             if (sizeCount === 1) {
