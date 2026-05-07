@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Contact Us | MK Patisserie Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Contact MK Patisserie Leicester. Get in touch for custom cakes, catering, event planning enquiries. Located in Leicester, UK.">
+    <meta name="keywords" content="contact MK Patisserie, Leicester bakery contact, cake orders Leicester, event enquiries">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/contact">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact Us | MK Patisserie Leicester">
+    <meta property="og:description" content="Contact MK Patisserie Leicester. Get in touch for custom cakes, catering, event planning enquiries. Located in Leicester, UK.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/contact">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us | MK Patisserie Leicester">
+    <meta name="twitter:description" content="Contact MK Patisserie Leicester. Get in touch for custom cakes, catering, event planning enquiries. Located in Leicester, UK.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .contact-hero {
+            min-height: 50vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.88), rgba(26, 26, 26, 0.82)),
+                        url('Images/cake15.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 73px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Ensure nav stays on top on contact page */
+        header {
+            z-index: 1000 !important;
+        }
+        
+        nav {
+            z-index: 1001 !important;
+        }
+        
+        .mobile-menu-toggle {
+            z-index: 1002 !important;
+            pointer-events: auto !important;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-method-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .contact-method-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .contact-method-card svg {
+            width: 50px;
+            height: 50px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-method-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method-card p {
+            color: var(--cream);
+        }
+
+        .contact-method-card a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-method-card a:hover {
+            color: var(--cream);
+        }
+
+        .faq-section {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .workshop-info {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .workshop-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .workshop-info p {
+            color: var(--cream);
+        }
+
+        .workshop-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .workshop-detail-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .workshop-detail-item p {
+            color: var(--cream);
+        }
+
+        .workshop-detail-item strong {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+    
+    <style>
+        /* Success Popup Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success-modal.active {
+            display: flex;
+        }
+        
+        .success-modal-content {
+            background: var(--black);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .success-checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .success-modal h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-modal p {
+            color: var(--cream);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-modal-close {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .success-modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="hero-content">
+            <h1 style="font-size: 4rem;">Get in Touch</h1>
+            <p class="tagline">Let's Create Your Moment Together</p>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section id="contact-methods">
+        <div class="section-inner">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">We'd Love to Hear From You</p>
+            
+            <div class="contact-methods">
+                <div class="contact-method-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@mkpatisserie.co.uk">info@mkpatisserie.co.uk</a></p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Click to send us an email</p>
+                </div>
+
+                <div class="contact-method-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <h3>Phone</h3>
+                    <p><a href="tel:07538027403">07538 027403</a></p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Click to call on mobile</p>
+                </div>
+
+                <div class="contact-method-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <h3>Instagram</h3>
+                    <p><a href="https://instagram.com/mkpatisserieltd" target="_blank">@mkpatisserieltd</a></p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">DM us for enquiries</p>
+                </div>
+            </div>
+
+            <div class="about-content" style="margin-top: 3rem; text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 1rem;">Business Information</h3>
+                <p><strong>Location:</strong> Based in Leicester, UK</p>
+                <p><strong>Service Area:</strong> Nationwide travel for events</p>
+                <p><strong>Response Time:</strong> 24-48 hours</p>
+                <p><strong>Food Hygiene Rating:</strong> 5 Star</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="section-inner">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Common Questions About Our Services</p>
+            
+            <div class="faq-section">
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>How far in advance should I book?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>For catering and event services, we recommend booking at least 3 weeks in advance. Custom cakes require 2 weeks notice, while cupcakes and other bakery items need 5 days. Workshop bookings should be made as soon as dates are announced on our Instagram.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Do you accommodate dietary requirements?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>Yes! We can accommodate most dietary requirements including vegetarian, vegan, gluten-free, and specific allergies. Please inform us of any requirements when placing your order so we can ensure everything is prepared safely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>What areas do you serve?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>We're based in Leicester and offer collection and delivery within Leicester. For catering and events, we travel nationwide. Delivery for bakery items can be arranged within Leicester and surrounding areas, with nationwide delivery available for special occasions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Can I see examples of your previous work?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>Absolutely! Check out our <a href="gallery.html" style="color: var(--gold); font-weight: 600;">Gallery</a> to see photos of our cakes, catering setups, and events. You can also follow us on Instagram @mkpatisserieltd for regular updates and behind-the-scenes content.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Do you offer event styling services?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>Yes! We offer complete event styling packages including balloon arches, backdrops, table arrangements, centerpieces, and themed décor. This can be added to any catering package or booked as a standalone service.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>What payment methods do you accept?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>We accept bank transfers, cash, and card payments. For larger catering and event bookings, we typically require a deposit to secure your date, with the balance due before the event.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>How do I place an order?</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p>You can place orders through the booking forms on our <a href="catering.html" style="color: var(--gold); font-weight: 600;">Catering</a> and <a href="bakery.html" style="color: var(--gold); font-weight: 600;">Bakery</a> pages, or contact us directly via email, phone, or Instagram DM. We'll get back to you within 24-48 hours to confirm details and finalize your order.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Enquiry Form -->
+    <section id="general-enquiry" >
+        <div class="section-inner">
+            <h2 class="section-title">General Enquiry</h2>
+            <p class="section-subtitle">For anything not covered by our specific forms</p>
+            <div class="contact-form" style="max-width: 700px; margin: 0 auto;">
+                <form name="general-enquiry-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm" action="#">
+                    <!-- Honeypot field for spam protection -->
+                    <input type="hidden" name="bot-field" />
+                    <!-- Form name for Netlify -->
+                    <input type="hidden" name="form-name" value="general-enquiry-form" />
+                    <!-- Form type for identification -->
+                    <input type="hidden" name="form-type" value="General Enquiry" />
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="07XXX XXXXXX">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="enquiry-type">Enquiry Type *</label>
+                        <select id="enquiry-type" name="enquiry-type" required>
+                            <option value="">Select enquiry type</option>
+                            <option value="general">General Question</option>
+                            <option value="workshop">Private Workshop Booking</option>
+                            <option value="styling">Event Styling Only</option>
+                            <option value="collaboration">Business Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your enquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Enquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-checkmark"></div>
+            
+            <h2>Enquiry Sent!</h2>
+            
+            <p>Thank you for contacting MK Patisserie.</p>
+            <p>We've received your enquiry and will aim to get back to you within <strong style="color: var(--gold);">48 hours</strong>.</p>
+            <p style="font-size: 1rem; opacity: 0.9; margin-top: 1rem;">We look forward to speaking with you soon!</p>
+            
+            <button class="success-modal-close" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission with custom popup
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission and Netlify redirect
+            
+            const form = this;
+            const formData = new FormData(form);
+            
+            // Submit form to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                // Show success modal
+                document.getElementById('successModal').classList.add('active');
+                // Reset form
+                form.reset();
+            })
+            .catch((error) => {
+                // Even on "error", form likely submitted (Netlify redirect causes CORS error)
+                console.log('Fetch error (likely success):', error);
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            });
+        });
+        
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            

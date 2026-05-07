@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Bakery - Custom Cakes & Treats | MK Patisserie Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Artisan bakery in Leicester offering custom cakes, cupcakes, cake jars, cakesicles, and Bruce jars. Order bespoke creations for weddings, birthdays, and special occasions.">
+    <meta name="keywords" content="custom cakes Leicester, cake jars, cakesicles, cupcakes, wedding cakes, birthday cakes, Bruce jars, artisan bakery">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/bakery">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Bakery - Custom Cakes & Treats | MK Patisserie Leicester">
+    <meta property="og:description" content="Artisan bakery offering custom cakes, cupcakes, cake jars, and cakesicles in Leicester. Order bespoke creations for any occasion.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/bakery">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bakery - Custom Cakes & Treats | MK Patisserie Leicester">
+    <meta name="twitter:description" content="Artisan bakery offering custom cakes, cupcakes, cake jars, and cakesicles in Leicester.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .bakery-hero {
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.88), rgba(26, 26, 26, 0.82)),
+                        url('Images/cakesicles4.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 73px;
+        }
+
+        .rotating-banner {
+            overflow: hidden;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(245, 230, 211, 0.05));
+        }
+
+        .bakery-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .bakery-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .bakery-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .bakery-card p {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+
+        .price-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .price-item-name {
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .price-item-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .order-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--gold), #C5A028);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .order-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .custom-order-note {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            color: var(--gold);
+            margin-top: 1rem;
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <style>
+        /* Success Popup Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success-modal.active {
+            display: flex;
+        }
+        
+        .success-modal-content {
+            background: var(--black);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .success-checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .success-modal h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-modal p {
+            color: var(--cream);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-modal-close {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .success-modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Bakery Hero -->
+    <section class="bakery-hero">
+        <div class="hero-content">
+            <h1 style="font-size: 4rem;">Artisan Bakery</h1>
+            <p class="tagline">Bespoke Baked Creations for Every Occasion</p>
+        </div>
+    </section>
+
+    <!-- Rotating Banner -->
+    <section class="rotating-banner">
+        <div class="gallery-carousel">
+            <div class="gallery-track">
+<div class="gallery-item">
+                    <img src="Images/catering/desserttable/dessert03.jpeg" alt="Custom cake" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/cakesicles/cakesicle01.webp" alt="Cakesicles" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/bakery/cake23.webp" alt="Custom cake" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/bakery/cake24.webp" alt="Bakery item" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/bakery/cakejars/saltedcaramel.webp" alt="Salted caramel cake jar" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/bakery/Bakery03.webp" alt="Bakery item" loading="lazy">
+                </div>
+                
+<div class="gallery-item">
+                    <img src="Images/mk.webp" alt="MK Patisserie" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/cakesicles/cakesicle02.webp" alt="Cakesicles" loading="lazy">
+                </div>
+<div class="gallery-item">
+                    <img src="Images/bakery/cake8.webp" alt="Custom cake" loading="lazy">
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scroll to view more</div>
+        
+        <!-- Gallery Link Button -->
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="gallery.html#bakery-filter-btn" class="cta-button">View Full Bakery Gallery</a>
+        </div>
+    </section>
+
+    <!-- Bakery Categories -->
+    <section id="bakery-products">
+        <div class="section-inner">
+            <h2 class="section-title">Our Bakery</h2>
+            <p class="section-subtitle">Click to Expand Product Options</p>
+            
+            <div class="menu-container">
+                <!-- Bespoke Cakes -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Bespoke Cakes</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p style="text-align: center; margin-bottom: 2rem;">Create your own cake - custom cakes designed to your vision.</p>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Sponge Flavours</h4>
+                            <ul class="menu-options">
+                                <li>Chocolate</li>
+                                <li>Vanilla</li>
+                                <li>Red Velvet</li>
+                                <li>Lemon Drizzle</li>
+                                <li>Mint</li>
+                                <li>Strawberry</li>
+                                <li>Pistachio</li>
+                            </ul>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Icing</h4>
+                            <ul class="menu-options">
+                                <li>Chocolate Buttercream</li>
+                                <li>Vanilla Buttercream</li>
+                                <li>Oreo Buttercream</li>
+                                <li>Freshcream</li>
+                                <li>Nutella Buttercream</li>
+                                <li>Rose Buttercream</li>
+                                <li>Lotus Buttercream</li>
+                            </ul>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Fillings (Optional)</h4>
+                            <ul class="menu-options">
+                                <li>Milk/Dark/White Chocolate Ganache</li>
+                                <li>Nutella</li>
+                                <li>Biscoff Spread</li>
+                                <li>Jam</li>
+                                <li>Fresh Raspberries/Strawberries</li>
+                                <li>Hazelnuts</li>
+                                <li>Pistachios</li>
+                                <li>Oreos</li>
+                                <li>Desiccated Coconut</li>
+                                <li>Creamcheese Frosting</li>
+                                <li>Any Buttercream Flavour</li>
+                            </ul>
+                            
+                            <div class="custom-order-note">
+                                Prices based on design complexity and size
+                            </div>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Enquire for Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cupcakes -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Cupcakes</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 1.5rem 0 1rem; text-align: center;">Gourmet Cupcakes</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; font-style: italic;">Premium flavors with elegant decorations</p>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(245, 230, 211, 0.8);">Click on a flavour name to view images</p>
+                            <ul class="menu-options cupcake-flavors">
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('redvelvet')">Red Velvet</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">A very moist classic red velvet cupcake topped with creamcheese frosting, garnished with some red cake crumbs</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('bounty')">Bounty</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cupcake, filled with a coconut cream, topped with Chocolate buttercream and desiccated coconut with a mini bounty</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('terryschocolateorange')">Terry's Chocolate Orange</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cupcake filled with some melted Terry orange chocolate, topped with an orange infused buttercream, and a mini Terry's chocolate</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('lemon')">Lemon</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Lemon drizzle cake, filled with lemon curd, topped with lemon buttercream and garnished with a candied lemon slice</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('ferrero')">Ferrero</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist chocolate cupcake with a nutella filling topped with chocolate buttercream, hazelnuts and a ferrero chocolate with a drizzle of nutella</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('lotusbiscoff')">Lotus Biscoff</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist vanilla cake filled with lotus biscoff, topped with lotus buttercream with a crushed lotus biscoff and extra, crushed lotus biscoff biscuit</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('chocmint')">Choc Mint</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cupcake filled with a chocolate mint sauce topped with a chocolate mint buttercream and some Aero mint chocolate</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('jammydodgers')">Jammy Dodgers</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cupcake filled with strawberry jam, topped with vanilla buttercream and a mini jammy dodger, drizzled with some strawberry sauce</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('roseandpistachio')">Rose and Pistachio</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist pistachio green cupcake, topped with a rose buttercream and garnished with Pistachios and rose petals</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCupcakeGallery('oreo')">Oreo</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cupcake topped with an oreo buttercream and mini oreos</span>
+                                </li>
+                            </ul>
+                            <p style="text-align: center; margin-top: 1.5rem; font-weight: 600; color: var(--gold);">Box of 6 - £18 | Box of 12 - £35</p>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Standard Cupcakes</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; font-style: italic;">Classic flavors for any occasion</p>
+                            <ul class="menu-options">
+                                <li><strong>Chocolate</strong><br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cake with chocolate buttercream</span></li>
+                                <li><strong>Classic Vanilla</strong><br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cupcake with vanilla buttercream</span></li>
+                            </ul>
+                            <p style="text-align: center; font-size: 0.9rem; font-style: italic; color: var(--gold); margin-top: 1rem;">Can be customized according to your theme, design, and colour</p>
+                            <p style="text-align: center; margin-top: 1.5rem; font-weight: 600; color: var(--gold);">Box of 6 - £15 | Box of 12 - £30</p>
+                            
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cakesicles -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Cakesicles</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p style="text-align: center; margin-bottom: 2rem;">Fun and trendy cake popsicles - a unique treat that's perfect for parties and gifts.</p>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 1.5rem 0 1rem; text-align: center;">Gourmet Flavours - £2.50 each</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(245, 230, 211, 0.8);">Click on a flavour name to view images</p>
+                            <ul class="menu-options cakesicle-flavors">
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('bounty')">Bounty</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist chocolate cake mixed with desiccated coconut, covered in milk chocolate and topped with more desiccated coconut</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('crunchie')">Crunchie</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cake filled with crunchie chocolate, covered in milk chocolate, drizzled in white chocolate and topped with crushed crunchie chocolate</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('ferrero')">Ferrero</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist chocolate cake, filled with nutella and crushed hazelnuts, covered in a nutty milk chocolate garnished with half ferrero chocolate</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('keto')">Keto</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Sugar-free keto-friendly cakesicle option</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('lemonandcoconut')">Lemon and Coconut</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Lemon drizzle cake, filled with coconut, covered in white chocolate and topped with desiccated coconut, garnished with a candied lemon</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('lotusbiscoff')">Lotus Biscoff</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist vanilla sponge cake filled with lotus biscoff spread, covered with milk chocolate, drizzled with biscoff and topped with broken lotus biscuit</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('mintchocolate')">Mint Chocolate</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">A moist chocolate cake filled with choc mint sauce and crushed Aero mints, covered in white chocolate, drizzled in choc mint chocolate and topped with crushed aero mint chocolate</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('oreoandnutella')">Nutella and Oreo</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Very moist chocolate cake, filled with nutella and oreo crumbs, covered in white chocolate, drizzled in nutella and crushed oreo</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('roseandpistachio')">Rose and Pistachio</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Very moist pistachio cake, infused with some rose syrup, filled with crushed Pistachios, covered with white chocolate and topped with crushed Pistachios and rose petals</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openFlavorGallery('victoriaclassic')">Victoria Classic</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Classic Victoria sponge flavor</span>
+                                </li>
+                            </ul>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Simple Vanilla & Chocolate - £2.00 each</h4>
+                            <ul class="menu-options">
+                                <li><strong>Chocolate</strong><br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist chocolate cake covered in either milk or white chocolate (can be customised)</span></li>
+                                <li><strong>Vanilla</strong><br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Soft vanilla sponge covered in either milk or white chocolate (can be customised)</span></li>
+                            </ul>
+                            <p style="text-align: center; font-size: 0.9rem; font-style: italic; color: var(--gold); margin-top: 1rem;">Can be customized according to your theme, design, and colour</p>
+                            
+                            <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px; padding: 1.5rem; margin-top: 2rem;">
+                                <h4 style="color: var(--gold); font-size: 1.2rem; margin-bottom: 1rem; text-align: center;">Pricing & Options</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">✓ Minimum order: 4 cakesicles per flavour</li>
+                                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">✓ Discount available on orders of 100+ cakesicles</li>
+                                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">✓ Individual wrapping: +£0.30 per cakesicle</li>
+                                    <li style="padding: 0.5rem 0;">✓ Personalisation: +£0.20 per cakesicle</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="text-align: center; font-style: italic; margin-top: 2rem;">Custom decorations available</p>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keto Treats -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Keto Treats</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p style="text-align: center; margin-bottom: 2rem;">Delicious low-carb, sugar-free treats that don't compromise on taste. Perfect for those following a keto lifestyle.</p>
+                            
+                            <!-- Chocolate Fudge Cheesecake Brownies -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                <h4 style="color: var(--gold); text-align: center; margin-bottom: 1rem; font-size: 1.3rem;">Chocolate Fudge Cheesecake Brownies <span style="font-size: 0.9rem; font-weight: normal; color: var(--cream);">(116 Calories)</span></h4>
+                                <div style="text-align: center; margin-bottom: 1rem;">
+                                    <img src="Images/bakery/keto/chocolatecheesecakebrownie.webp" alt="Chocolate Fudge Cheesecake Brownies" style="max-width: 300px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>Small Box</span><span style="color: var(--gold); font-weight: 600;">£15</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                                    <span>Large Box</span><span style="color: var(--gold); font-weight: 600;">£30</span>
+                                </div>
+                                <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                                    <p style="text-align: center; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem;">Nutritional Info (per brownie):</p>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+                                        <span>11g Fat</span><span>1g Net Carb</span>
+                                        <span>2g Protein</span><span>1g Fiber</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Brookies -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                <h4 style="color: var(--gold); text-align: center; margin-bottom: 1rem; font-size: 1.3rem;">Brookies <span style="font-size: 0.9rem; font-weight: normal; color: var(--cream);">(170 Calories)</span></h4>
+                                <div style="text-align: center; margin-bottom: 1rem;">
+                                    <img src="Images/bakery/keto/brookie.webp" alt="Brookies" style="max-width: 300px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>Small Box</span><span style="color: var(--gold); font-weight: 600;">£16</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                                    <span>Large Box</span><span style="color: var(--gold); font-weight: 600;">£32</span>
+                                </div>
+                                <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                                    <p style="text-align: center; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem;">Nutritional Info (per brookie):</p>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+                                        <span>15.68g Fat</span><span>2.38g Net Carb</span>
+                                        <span>4.58g Protein</span><span>4g Fiber</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Choc Chip Cookies -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                <h4 style="color: var(--gold); text-align: center; margin-bottom: 1rem; font-size: 1.3rem;">Choc Chip Cookies <span style="font-size: 0.9rem; font-weight: normal; color: var(--cream);">(160 Calories)</span></h4>
+                                <div style="text-align: center; margin-bottom: 1rem;">
+                                    <img src="Images/bakery/keto/chocchipcookie.webp" alt="Choc Chip Cookies" style="max-width: 300px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>6 Cookies</span><span style="color: var(--gold); font-weight: 600;">£13.50</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                                    <span>12 Cookies</span><span style="color: var(--gold); font-weight: 600;">£26</span>
+                                </div>
+                                <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                                    <p style="text-align: center; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem;">Nutritional Info (per cookie):</p>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+                                        <span>14.58g Fat</span><span>2g Net Carb</span>
+                                        <span>4g Protein</span><span>4.48g Fiber</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Almond Cakesicles -->
+                            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                <h4 style="color: var(--gold); text-align: center; margin-bottom: 1rem; font-size: 1.3rem;">Almond Cakesicles</h4>
+                                <div style="text-align: center; margin-bottom: 1rem;">
+                                    <img src="Images/cakesicles/keto.webp" alt="Almond Cakesicles" style="max-width: 300px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>Each</span><span style="color: var(--gold); font-weight: 600;">£3.50</span>
+                                </div>
+                                <p style="text-align: center; font-style: italic; margin-top: 0.5rem;">Minimum order of 4</p>
+                            </div>
+
+                            <!-- Mix Keto Treat Box -->
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="color: var(--gold); text-align: center; margin-bottom: 1rem; font-size: 1.3rem;">Mix Keto Treat Box</h4>
+                                <div style="text-align: center; margin-bottom: 1rem;">
+                                    <img src="Images/bakery/keto/mixedtreatbox.webp" alt="Mix Keto Treat Box" style="max-width: 300px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>Mixed Box</span><span style="color: var(--gold); font-weight: 600;">£35</span>
+                                </div>
+                                <p style="text-align: center; font-style: italic; margin-top: 0.5rem;">For a mix of brownies, brookies and cookies</p>
+                            </div>
+
+                            <p style="text-align: center; margin-top: 2rem; color: var(--gold); font-weight: 600;">Made with premium almond flour and natural sweeteners</p>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bruce Jars -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Bruce Jars</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p style="text-align: center; margin-bottom: 2rem;">Rich chocolate cake layered with signature chocolate sauce and smooth ganache.</p>
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <img src="Images/Bruce.webp" alt="Bruce Jars" style="width: 100%; max-width: 300px; border-radius: 15px; border: 2px solid var(--gold);">
+                            </div>
+                            <ul class="menu-options">
+                                <li style="display: flex; justify-content: space-between;"><span>Single Jar</span><span style="color: var(--gold); font-weight: 600;">£5.50</span></li>
+                                <li style="display: flex; justify-content: space-between;"><span>Box of 4</span><span style="color: var(--gold); font-weight: 600;">£20.00</span></li>
+                            </ul>
+                            <p style="text-align: center; font-style: italic; margin-top: 2rem;">Perfect for gifts and special occasions</p>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cake Jars -->
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Cake Jars</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-details">
+                            <p style="text-align: center; margin-bottom: 2rem;">Moist cake layers with buttercream frosting, beautifully presented in individual jars.</p>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 1.5rem 0 1rem; text-align: center;">MK's Specials</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(245, 230, 211, 0.8);">Click on a flavour name to view images</p>
+                            <ul class="menu-options cakejar-flavors">
+                                <li>
+                                    <strong>Monkey Trouble</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Moist banana cake filled with chocolate buttercream, nutella and chocolate chips</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('cookiesandcream')">Cookies and Cream</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla sponge cake filled with oreo buttercream, crushed oreos and chocolate ganache drip</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('biscoff')">Lotus Lovers</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla sponge cake filled with lotus buttercream, biscoff spread and crushed lotus biscuits</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('bounty')">Bountilicious</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate sponge cake with a coconut bounty centre topped with extra desiccated coconut</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('vanillaandjam')">Victorian Classic</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla sponge cake filled with jam and vanilla buttercream</span>
+                                </li>
+                                <li>
+                                    <strong>Chocoholic</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Rich chocolate sponge filled with chocolate ganache and chocolate buttercream</span>
+                                </li>
+                                <li>
+                                    <strong>Lemon and Coconut</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Zesty lemon sponge filled with vanilla buttercream and desiccated coconut</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('ferrero')">Ferrero</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate sponge cake with nutella buttercream filled with Nutella, hazelnuts and crushed ferrero rocher</span>
+                                </li>
+                            </ul>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Premium Menu</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(245, 230, 211, 0.8);">Click on a flavour name to view images</p>
+                            <ul class="menu-options cakejar-flavors">
+                                <li>
+                                    <strong>Pina Colada</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cake filled with crushed pineapple and coconut, topped with fresh cream, a light and tropical delight</span>
+                                </li>
+                                <li>
+                                    <strong>Tres Leche</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cake soaked with sweet flavoured milk, topped with fresh cream... the perfect cake in a jar</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('banoffee')">Banoffee</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">A moist banana cake filled with fresh cream, a nice rich toffee sauce and fresh banana. Topped with some chocolate chips</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('tiramisu')">Tiramisu</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cake soaked in strong black coffee filled with fresh cream and topped with cocoa powder</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('bounty')">Bounty</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cake with a coconut bounty centre topped up with belgian milk chocolate and desiccated coconut</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('ferrero')">Ferrero</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cake filled with Nutella buttercream, nutella sauce and hazelnuts</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('biscoff')">Lotus Biscoff</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla cake filled with buttercream, biscoff filling and extra, crushed lotus biscoff biscuit</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('saltedcaramel')">Salted Caramel</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate cake with salted caramel buttercream filled with a salted caramel chocolate sauce and some salted pretzels for some crunch</span>
+                                </li>
+                            </ul>
+                            
+                            <h4 style="color: var(--gold); font-size: 1.3rem; margin: 2rem 0 1rem; text-align: center;">Menu</h4>
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(245, 230, 211, 0.8);">Click on a flavour name to view images</p>
+                            <ul class="menu-options cakejar-flavors">
+                                <li>
+                                    <strong>Chocolate Heaven</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate moist cake with a delicious chocolate ganache filled with some extra chocolate crunch</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('roseandpistachio')">Rose and Pistachio</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Pistachio sponge cake with a silky rose buttercream topped with some extra crushed pistachios and rose petals</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('classicvanilla')">Classic Vanilla</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Vanilla sponge cake filled with strawberry jam and buttercream and crunchie biscuits in the centre</span>
+                                </li>
+                                <li>
+                                    <strong>Oreo and Nutella</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate oreo sponge cake filled with nutella and oreo crunchy pieces</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('redvelvet')">Red Velvet</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Red velvet sponge cake with a creamcheese filling and some extra crunch in the centre</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('strawberriesandcream')">Strawberries and Cream</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Strawberry sponge cake with fresh cream filled with fresh strawberry chunks</span>
+                                </li>
+                                <li>
+                                    <strong>Lemon and Coconut</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Lemon drizzle sponge cake with buttercream filled with desiccated coconut</span>
+                                </li>
+                                <li>
+                                    <strong>Choc Mint</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Mint sponge cake with a soft silky chocolate icing centre and extra mint chocolate chunks</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('blackforest')">Blackforrest Delight</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Rich chocolate sponge cake soaked with cherry flavour, filled with fresh cream and cherry compote</span>
+                                </li>
+                                <li>
+                                    <strong class="flavor-name" onclick="openCakeJarGallery('chocoorange')">Chocolate Orange</strong>
+                                    <br><span style="font-size: 0.9rem; line-height: 1.5; display: block; margin-top: 0.3rem;">Chocolate orange sponge cake filled with Terry's chocolate orange butter cream and some extra Terry's chocolate crunch</span>
+                                </li>
+                            </ul>
+                            
+                            <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--gold);">Single Jar - £5.50 | Box of 4 - £20.00</p>
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <a href="#bakery-booking" class="cta-button">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section id="bakery-booking">
+        <div class="section-inner">
+            <h2 class="section-title">Place Your Order</h2>
+            <p class="section-subtitle">Fill out the form to order from our bakery</p>
+            <div class="contact-form" style="max-width: 700px; margin: 0 auto;">
+                <form name="bakery-order-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="bakeryOrderForm">
+                    <!-- Honeypot field for spam protection -->
+                    <input type="hidden" name="bot-field" />
+                    <!-- Form name for Netlify -->
+                    <input type="hidden" name="form-name" value="bakery-order-form" />
+                    <!-- Form type for identification -->
+                    <input type="hidden" name="form-type" value="Bakery Order" />
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="07XXX XXXXXX" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Products Section -->
+                    <div class="form-group">
+                        <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; display: block;">Items to Order</label>
+                        <div id="bakeryProductsContainer"></div>
+                        <button type="button" id="addBakeryItemBtn" style="background: var(--gold); color: var(--black); border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; margin-top: 1rem;">+ Add Item</button>
+                    </div>
+                    
+                    <!-- Hidden field for products data -->
+                    <input type="hidden" name="items" id="bakeryItemsData">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="collection-date">Collection/Delivery Date *</label>
+                            <input type="date" id="collection-date" name="collection-date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery-option">Collection or Delivery? *</label>
+                        <select id="delivery-option" name="delivery-option" required>
+                            <option value="">Select option</option>
+                            <option value="collection">Collection from Leicester</option>
+                            <option value="delivery-leicester">Delivery within Leicester</option>
+                            <option value="delivery-other">Delivery outside Leicester</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="special-requests">Special Requests or Design Details</label>
+                        <textarea id="special-requests" name="special-requests" placeholder="For custom cakes, please describe your design vision, colors, theme, etc. For other items, list any special decorations or requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit Bakery Order</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ordering Information -->
+    <section id="ordering-info" >
+        <div class="section-inner">
+            <h2 class="section-title">Ordering Information</h2>
+            
+            <!-- Desktop version - visible on desktop -->
+            <div class="about-content ordering-info-desktop">
+                <h3 style="color: var(--gold); margin-bottom: 1rem;">Lead Times</h3>
+                <p>Custom cakes require at least 2 weeks notice. Cupcakes, cakesicles, and keto treats require at least 5 days notice for orders.</p>
+                
+                <h3 style="color: var(--gold); margin: 2rem 0 1rem;">Collection & Delivery</h3>
+                <p>Collection is available from our Leicester location. Delivery is available within Leicester and surrounding areas. Nationwide delivery can be arranged for special occasions.</p>
+                
+                <h3 style="color: var(--gold); margin: 2rem 0 1rem;">Allergen Information</h3>
+                <p>All our products are made in a kitchen that handles nuts, dairy, eggs, and gluten. Please inform us of any allergies when ordering. We can accommodate most dietary requirements with advance notice.</p>
+                
+                <h3 style="color: var(--gold); margin: 2rem 0 1rem;">Custom Design Consultation</h3>
+                <p>For bespoke cakes, we offer a complimentary design consultation where we'll discuss your vision, theme, colors, and flavor preferences to create your perfect cake.</p>
+            </div>
+            
+            <!-- Mobile version - accordion dropdowns visible on mobile only -->
+            <div class="menu-container ordering-info-mobile">
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Lead Times</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <p>Custom cakes require at least 2 weeks notice. Cupcakes, cakesicles, and keto treats require at least 5 days notice for orders.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Collection & Delivery</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <p>Collection is available from our Leicester location. Delivery is available within Leicester and surrounding areas. Nationwide delivery can be arranged for special occasions.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Allergen Information</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <p>All our products are made in a kitchen that handles nuts, dairy, eggs, and gluten. Please inform us of any allergies when ordering. We can accommodate most dietary requirements with advance notice.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-header" onclick="toggleMenu(this)">
+                        <h3>Custom Design Consultation</h3>
+                        <span class="menu-icon">▼</span>
+                    </div>
+                    <div class="menu-content">
+                        <p>For bespoke cakes, we offer a complimentary design consultation where we'll discuss your vision, theme, colors, and flavor preferences to create your perfect cake.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimers Section -->
+    <section id="disclaimers">
+        <div class="section-inner">
+            <h2 class="section-title">Important Information & Policies</h2>
+            <p class="section-subtitle">Please read before placing your order</p>
+            
+            <div class="disclaimers-container">
+                
+                <!-- General Business Policies -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>Business Information & Policies</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <ul>
+                            <li><strong>Working Hours:</strong> 9am - 7pm (Enquiries will also be answered within this time)</li>
+                            <li><strong>Urgent Queries:</strong> If your query is urgent, please call me on my mobile. If I am busy, please leave me a message.</li>
+                            <li><strong>Deposits:</strong> All orders require a 50% deposit on booking to secure your date and product (non-refundable)</li>
+                            <li><strong>Payment Methods:</strong> Deposits can be made via PayPal or Bank transfer</li>
+                            <li><strong>Occasional Orders:</strong> Full payment required to secure date and order</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cake Orders -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>Cake Orders & Collection</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h4>Collection Instructions:</h4>
+                        <ul>
+                            <li>When collecting a cake, please hold the box from the bottom with both hands</li>
+                            <li>Place the cake on a flat surface in the car (preferably by the passengers footwell)</li>
+                            <li>Do NOT place the cake on the seat as it is more likely to collapse</li>
+                        </ul>
+                        
+                        <h4>Storage & Shelf Life:</h4>
+                        <ul>
+                            <li>Cakes are baked fresh and will last 3-4 days, 1 week in the fridge, or 2 months frozen</li>
+                            <li>If cakes contain fresh fruits, please consume within the same day</li>
+                            <li>Cakes can be kept in room temperature if cut on the same day</li>
+                            <li>Fresh cream cakes need to be kept in the fridge if not cut within 4 hours from collecting the cake</li>
+                        </ul>
+                        
+                        <h4>Design & Color Matching:</h4>
+                        <ul>
+                            <li>When working with a certain color palette for a cake, I will try my best to match it as close as possible. There may be a difference in color.</li>
+                            <li>If you give me a design to recreate for you, I will match it as close as I can, but will never copy another baker's design exactly, as all my cakes are unique and different.</li>
+                            <li>We cannot guarantee the exact same design or color when replicating another cake or even my own design.</li>
+                        </ul>
+                        
+                        <h4>Customer Responsibility:</h4>
+                        <ul>
+                            <li>It is the customer's responsibility to check the cake when collecting it. Once it leaves my premises I will not take responsibility for any damages or dislikes of the cake.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cake Jars -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>Cake Jars</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h4>Storage:</h4>
+                        <ul>
+                            <li>Cake jars containing fruits or fresh cream need to be consumed on the same day or kept in the fridge straight away and consumed within 3-4 days</li>
+                            <li>For any other flavors there's a shelf life of 3 days or kept in the fridge for 1 week</li>
+                        </ul>
+                        
+                        <h4>Postage:</h4>
+                        <ul>
+                            <li>Jars that contain fruits and fresh cream are not suitable for postage orders</li>
+                            <li>All other flavors can be posted anywhere in the UK via Royal mail 1st class or special delivery</li>
+                        </ul>
+                        
+                        <h4>Ordering:</h4>
+                        <ul>
+                            <li>For a selection of flavors I usually take orders for these on specific Cake jar days. Keep an eye out for my stories or posts.</li>
+                            <li>For any custom orders on my cake jars there's a minimum order of 4 jars per flavor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Graze Boxes -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>Graze Boxes & Platters</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h4>Ordering Information:</h4>
+                        <ul>
+                            <li>To place an order please specify which graze you would like and how many people you want it to feed</li>
+                            <li>Each graze comes in 2 or 3 different sizes</li>
+                            <li>I will need a minimum of 3-4 days notice</li>
+                        </ul>
+                        
+                        <h4>Deposits & Allergies:</h4>
+                        <ul>
+                            <li>To confirm all bookings we will need a minimum of 50% deposit which is non-refundable</li>
+                            <li>This can be done via bank transfer or PayPal</li>
+                            <li>Please specify any allergies or requirements you may have</li>
+                        </ul>
+                        
+                        <h4>Storage:</h4>
+                        <ul>
+                            <li>Graze platters contain mainly fresh fruit and cheese so please consume on the day or can be kept in the fridge over night</li>
+                            <li>If there is something in particular you don't eat please let me know and we can consider swapping it for something else</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Postal Orders -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>Postal Orders</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h4>Delivery Options:</h4>
+                        <ul>
+                            <li>We have 2 options when posting any orders: 1st class signed for and recorded delivery via Royal mail</li>
+                            <li>For 1st class signed for they will require your signature so please make sure someone is at home to receive your post</li>
+                        </ul>
+                        
+                        <h4>Liability:</h4>
+                        <ul>
+                            <li>We do not take any liability for losses or damages done via Royal Mail. Therefore, I will not be issuing any refunds for mistakes made on their part such as loss or mishandling.</li>
+                            <li>However for recorded delivery, I will be able to track the parcel and make sure it does not get lost. If in any case the parcel does get lost, I can refund the postal fee, BUT not the full refund for the product/goods.</li>
+                        </ul>
+                        
+                        <h4>Important:</h4>
+                        <ul>
+                            <li>Please make sure you choose the correct postage option when placing your order</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- General Product Disclaimers -->
+                <div class="disclaimer-item">
+                    <div class="disclaimer-header" onclick="toggleDisclaimer(this)">
+                        <h3>General Product Information</h3>
+                        <span class="disclaimer-icon">▼</span>
+                    </div>
+                    <div class="disclaimer-content">
+                        <h4>Product Details:</h4>
+                        <ul>
+                            <li>When placing an order with me please give me as much detail as possible for the product/s you require</li>
+                            <li>When it comes to chocolate covered strawberries, please note that they are made with fresh, natural fruit. Because strawberries are grown in nature and not manufactured, we cannot guarantee uniform size, appearance, or taste. Variations are normal and part of what makes each strawberry unique</li>
+                            <li>I would really appreciate it if you could avoid requesting photos before collection, as it can be a bit difficult for me to keep up with all the requests. Where possible, I will of course share photos. Thank you for your understanding</li>
+                        </ul>
+                        
+                        <h4>Cancellations & Refunds:</h4>
+                        <ul>
+                            <li>50% non-refundable deposit is required within 24 hrs when placing an order</li>
+                            <li>Deposits will not be refunded if you decide to cancel a cake, however under extreme circumstances I will be happy to put that towards your next order within the year</li>
+                            <li>If I cancel your order due to any unforeseen circumstances, I will refund the deposit</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="imageLightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage">
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Image lightbox functionality
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+
+        // Add click event to all gallery images
+        galleryImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = this.src;
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        // Close lightbox when clicking X
+        closeBtn.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+
+        // Close lightbox when clicking outside image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Disclaimer toggle function
+        function toggleDisclaimer(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.disclaimer-icon');
+            const isOpen = content.style.maxHeight;
+            
+            if (isOpen) {
+                content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Cakesicle flavor gallery
+        const flavorImages = {
+            'bounty': ['Images/cakesicles/bounty.webp'],
+            'crunchie': ['Images/cakesicles/crunchie.webp'],
+            'ferrero': ['Images/cakesicles/ferrero.webp', 'Images/cakesicles/ferrero1.webp'],
+            'keto': ['Images/cakesicles/keto.webp'],
+            'lemonandcoconut': ['Images/cakesicles/lemonandcoconut.webp', 'Images/cakesicles/lemonandcoconut1.webp'],
+            'lotusbiscoff': ['Images/cakesicles/lotusbiscoff.webp'],
+            'mintchocolate': ['Images/cakesicles/mintchocolate.webp', 'Images/cakesicles/mintchocolate1.webp'],
+            'oreoandnutella': ['Images/cakesicles/oreoandnutella.webp'],
+            'roseandpistachio': ['Images/cakesicles/roseandpistachio.webp'],
+            'victoriaclassic': ['Images/cakesicles/victoriaclassic.webp']
+        };
+
+        function openFlavorGallery(flavor) {
+            const images = flavorImages[flavor];
+            if (!images || images.length === 0) return;
+
+            // Use the existing lightbox
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            
+            // For now, show the first image (we can enhance this later for multiple images)
+            lightboxImg.src = images[0];
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // If there are multiple images, cycle through them on click
+            if (images.length > 1) {
+                let currentIndex = 0;
+                lightboxImg.onclick = function(e) {
+                    e.stopPropagation();
+                    currentIndex = (currentIndex + 1) % images.length;
+                    lightboxImg.src = images[currentIndex];
+                };
+            } else {
+                lightboxImg.onclick = null;
+            }
+        }
+
+        // Cupcake flavor gallery
+        const cupcakeImages = {
+            'redvelvet': ['Images/bakery/cupcake/redvelvet.webp'],
+            'bounty': ['Images/bakery/cupcake/bounty.webp'],
+            'terryschocolateorange': ['Images/bakery/cupcake/chocolateorange.webp'],
+            'lemon': ['Images/bakery/cupcake/lemon.webp'],
+            'ferrero': ['Images/bakery/cupcake/ferrero.webp'],
+            'lotusbiscoff': ['Images/bakery/cupcake/lotus.webp'],
+            'chocmint': ['Images/bakery/cupcake/chocomint.webp'],
+            'jammydodgers': ['Images/bakery/cupcake/jammydodger.webp'],
+            'roseandpistachio': ['Images/bakery/cupcake/roseandpistachio.webp'],
+            'oreo': ['Images/bakery/cupcake/oreo.webp']
+        };
+
+        function openCupcakeGallery(flavor) {
+            const images = cupcakeImages[flavor];
+            if (!images || images.length === 0) return;
+
+            // Use the existing lightbox
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            
+            // Show the first image
+            lightboxImg.src = images[0];
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // If there are multiple images, cycle through them on click
+            if (images.length > 1) {
+                let currentIndex = 0;
+                lightboxImg.onclick = function(e) {
+                    e.stopPropagation();
+                    currentIndex = (currentIndex + 1) % images.length;
+                    lightboxImg.src = images[currentIndex];
+                };
+            } else {
+                lightboxImg.onclick = null;
+            }
+        }
+
+        // Cake jar flavor gallery
+        const cakeJarImages = {
+            'banoffee': ['Images/bakery/cakejars/banoffee.webp', 'Images/bakery/cakejars/banoffee1.webp'],
+            'biscoff': ['Images/bakery/cakejars/biscoff.webp'],
+            'blackforest': ['Images/bakery/cakejars/blackforest.webp'],
+            'bounty': ['Images/bakery/cakejars/bounty.webp'],
+            'chocoorange': ['Images/bakery/cakejars/chocoorange.webp'],
+            'classicvanilla': ['Images/bakery/cakejars/vanillaandjam.webp'],
+            'cookiesandcream': ['Images/bakery/cakejars/cookiesandcream.webp'],
+            'ferrero': ['Images/bakery/cakejars/ferrero.webp', 'Images/bakery/cakejars/ferrero1.webp'],
+            'redvelvet': ['Images/bakery/cakejars/redvelvet.webp'],
+            'roseandpistachio': ['Images/bakery/cakejars/roseandpistachio.webp'],
+            'saltedcaramel': ['Images/bakery/cakejars/saltedcaramel.webp'],
+            'strawberriesandcream': ['Images/bakery/cakejars/strawberriesandcream.webp'],
+            'tiramisu': ['Images/bakery/cakejars/tiramisu1.webp', 'Images/bakery/cakejars/tiramisu2.webp'],
+            'vanillaandjam': ['Images/bakery/cakejars/vanillaandjam.webp']
+        };
+
+        function openCakeJarGallery(flavor) {
+            const images = cakeJarImages[flavor];
+            if (!images || images.length === 0) return;
+
+            // Use the existing lightbox
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            
+            // Show the first image
+            lightboxImg.src = images[0];
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // If there are multiple images, cycle through them on click
+            if (images.length > 1) {
+                let currentIndex = 0;
+                lightboxImg.onclick = function(e) {
+                    e.stopPropagation();
+                    currentIndex = (currentIndex + 1) % images.length;
+                    lightboxImg.src = images[currentIndex];
+                };
+            } else {
+                lightboxImg.onclick = null;
+            }
+        }
+
+        // Bakery Product Selection System
+        let bakeryProductCounter = 0;
+
+        const productTypes = {
+            'Bespoke Cakes': {
+                fields: ['sponge', 'icing', 'filling', 'quantity'],
+                sponges: ['Chocolate', 'Vanilla', 'Red Velvet', 'Lemon Drizzle', 'Mint', 'Strawberry', 'Pistachio'],
+                icings: ['Chocolate Buttercream', 'Vanilla Buttercream', 'Oreo Buttercream', 'Freshcream', 'Nutella Buttercream', 'Rose Buttercream', 'Lotus Buttercream'],
+                fillings: ['No Filling', 'Milk/Dark/White Chocolate Ganache', 'Nutella', 'Biscoff Spread', 'Jam', 'Fresh Raspberries/Strawberries', 'Hazelnuts', 'Pistachios', 'Oreos', 'Desiccated Coconut', 'Creamcheese Frosting', 'Any Buttercream Flavour']
+            },
+            'Cupcakes': {
+                fields: ['flavour', 'size', 'quantity'],
+                flavours: {
+                    'Gourmet': ['Red Velvet', 'Bounty', 'Terry\'s Chocolate Orange', 'Lemon', 'Ferrero', 'Lotus Biscoff', 'Choc Mint', 'Jammy Dodgers', 'Rose and Pistachio', 'Oreo'],
+                    'Standard': ['Chocolate', 'Classic Vanilla']
+                },
+                sizes: {
+                    'Gourmet': ['Box of 6 - £18', 'Box of 12 - £35'],
+                    'Standard': ['Box of 6 - £15', 'Box of 12 - £30']
+                }
+            },
+            'Cake Jars': {
+                fields: ['flavour', 'size', 'quantity'],
+                flavours: ['Monkey Trouble', 'Cookies and Cream', 'Lotus Lovers', 'Bountilicious', 'Victorian Classic', 'Chocoholic', 'Lemon and Coconut', 'Ferrero', 'Pina Colada', 'Tres Leche', 'Banoffee', 'Tiramisu', 'Bounty', 'Lotus Biscoff', 'Salted Caramel', 'Chocolate Heaven', 'Rose and Pistachio', 'Classic Vanilla', 'Oreo and Nutella', 'Red Velvet', 'Strawberries and Cream', 'Choc Mint', 'Blackforrest Delight', 'Chocolate Orange'],
+                sizes: ['Single Jar - £5.50', 'Box of 4 - £20.00']
+            },
+            'Cakesicles': {
+                fields: ['flavour', 'quantity'],
+                flavours: {
+                    'Gourmet - £2.50 each': ['Bounty', 'Crunchie', 'Ferrero', 'Keto', 'Lemon and Coconut', 'Lotus Biscoff', 'Mint Chocolate', 'Nutella and Oreo', 'Rose and Pistachio', 'Victoria Classic'],
+                    'Simple - £2.00 each': ['Chocolate', 'Vanilla']
+                },
+                minQuantity: 4
+            },
+            'Bruce Jars': {
+                fields: ['size', 'quantity'],
+                sizes: ['Single Jar - £5.50', 'Box of 4 - £20.00']
+            },
+            'Keto Treats': {
+                fields: ['type', 'size', 'quantity'],
+                types: ['Chocolate Fudge Cheesecake Brownies', 'Brookies', 'Choc Chip Cookies', 'Almond Cakesicles', 'Mix Keto Treat Box'],
+                sizes: {
+                    'Chocolate Fudge Cheesecake Brownies': ['Small Box - £15', 'Large Box - £30'],
+                    'Brookies': ['Small Box - £16', 'Large Box - £32'],
+                    'Choc Chip Cookies': ['6 Cookies - £13.50', '12 Cookies - £26'],
+                    'Almond Cakesicles': 'Each - £3.50',
+                    'Mix Keto Treat Box': 'Mixed Box - £35'
+                },
+                minQuantity: {
+                    'Almond Cakesicles': 4
+                }
+            }
+        };
+
+        window.addBakeryProduct = function() {
+            bakeryProductCounter++;
+            const container = document.getElementById('bakeryProductsContainer');
+            
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product-order-item';
+            productDiv.id = `bakeryProduct-${bakeryProductCounter}`;
+            productDiv.style.cssText = 'background: rgba(26, 26, 26, 0.8); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--gold); margin-bottom: 1rem; position: relative;';
+            
+            const currentCounter = bakeryProductCounter;
+            
+            productDiv.innerHTML = `
+                <button type="button" class="remove-product-btn" data-id="${currentCounter}" style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold;">×</button>
+                
+                <h4 style="color: var(--gold); margin-bottom: 1rem;">Item ${currentCounter}</h4>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product Type *</label>
+                        <select required class="product-type-select" data-product-num="${currentCounter}">
+                            <option value="">-- Choose product type --</option>
+                            ${Object.keys(productTypes).map(type => `<option value="${type}">${type}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>
+
+                <div id="dynamicFields-${currentCounter}"></div>
+            `;
+            
+            container.appendChild(productDiv);
+            
+            // Add event listeners
+            const removeBtn = productDiv.querySelector('.remove-product-btn');
+            removeBtn.addEventListener('click', function() {
+                removeBakeryProduct(this.dataset.id);
+            });
+            
+            const productSelect = productDiv.querySelector('.product-type-select');
+            productSelect.addEventListener('change', function() {
+                updateBakeryProductFields(this.dataset.productNum);
+            });
+        }
+
+        window.removeBakeryProduct = function(id) {
+            const productDiv = document.getElementById(`bakeryProduct-${id}`);
+            if (productDiv) {
+                productDiv.remove();
+            }
+        }
+
+        window.updateBakeryProductFields = function(productNum) {
+            const productDiv = document.getElementById(`bakeryProduct-${productNum}`);
+            const productSelect = productDiv.querySelector('.product-type-select');
+            const dynamicFieldsContainer = document.getElementById(`dynamicFields-${productNum}`);
+            
+            const selectedType = productSelect.value;
+            if (!selectedType) {
+                dynamicFieldsContainer.innerHTML = '';
+                return;
+            }
+            
+            const config = productTypes[selectedType];
+            let html = '';
+            
+            // Sponge field (for Bespoke Cakes)
+            if (config.fields.includes('sponge')) {
+                html += `
+                    <div class="form-group">
+                        <label>Sponge Flavour *</label>
+                        <select required class="sponge-select">
+                            <option value="">-- Choose sponge --</option>
+                            ${config.sponges.map(sponge => `<option value="${sponge}">${sponge}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            }
+            
+            // Icing field
+            if (config.fields.includes('icing')) {
+                html += `
+                    <div class="form-group">
+                        <label>Icing *</label>
+                        <select required class="icing-select">
+                            <option value="">-- Choose icing --</option>
+                            ${config.icings.map(icing => `<option value="${icing}">${icing}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            }
+            
+            // Filling field
+            if (config.fields.includes('filling')) {
+                html += `
+                    <div class="form-group">
+                        <label>Filling *</label>
+                        <select required class="filling-select">
+                            <option value="">-- Choose filling --</option>
+                            ${config.fillings.map(filling => `<option value="${filling}">${filling}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            }
+            
+            // Type field (for Keto Treats)
+            if (config.fields.includes('type')) {
+                html += `
+                    <div class="form-group">
+                        <label>Type *</label>
+                        <select required class="type-select" onchange="updateKetoSize(${productNum})">
+                            <option value="">-- Choose type --</option>
+                            ${config.types.map(type => `<option value="${type}">${type}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div id="ketoSizeContainer-${productNum}"></div>
+                `;
+            }
+            
+            // Flavour field - handles nested structures for Cupcakes and Cakesicles
+            if (config.fields.includes('flavour')) {
+                if (typeof config.flavours === 'object' && !Array.isArray(config.flavours)) {
+                    // Nested flavours (Cupcakes, Cakesicles)
+                    html += `
+                        <div class="form-group">
+                            <label>Flavour *</label>
+                            <select required class="flavour-select" onchange="updateDynamicSize(${productNum})">
+                                <option value="">-- Choose flavour --</option>
+                                ${Object.entries(config.flavours).map(([category, flavs]) => 
+                                    `<optgroup label="${category}">${flavs.map(f => `<option value="${f}" data-category="${category}">${f}</option>`).join('')}</optgroup>`
+                                ).join('')}
+                            </select>
+                        </div>
+                        <div id="sizeContainer-${productNum}"></div>
+                    `;
+                } else {
+                    // Simple flavour list (Cake Jars)
+                    html += `
+                        <div class="form-group">
+                            <label>Flavour *</label>
+                            <select required class="flavour-select">
+                                <option value="">-- Choose flavour --</option>
+                                ${config.flavours.map(flavour => `<option value="${flavour}">${flavour}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Size field for simple products (Bruce Jars, Cake Jars with simple sizes)
+            if (config.fields.includes('size') && !config.fields.includes('flavour') && !config.fields.includes('type')) {
+                if (Array.isArray(config.sizes)) {
+                    html += `
+                        <div class="form-group">
+                            <label>Size *</label>
+                            <select required class="size-select">
+                                <option value="">-- Choose size --</option>
+                                ${config.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Quantity field (always last)
+            html += `
+                <div class="form-group">
+                    <label>Quantity *</label>
+                    <input type="number" min="1" value="1" required class="quantity-input" style="width: 100%; padding: 0.75rem; background: rgba(26, 26, 26, 0.8); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: var(--cream);">
+                </div>
+            `;
+            
+            dynamicFieldsContainer.innerHTML = html;
+        }
+        
+        // Update size based on selected flavour category (for Cupcakes, Cakesicles)
+        window.updateDynamicSize = function(productNum) {
+            const productDiv = document.getElementById(`bakeryProduct-${productNum}`);
+            const productSelect = productDiv.querySelector('.product-type-select');
+            const flavourSelect = productDiv.querySelector('.flavour-select');
+            const sizeContainer = document.getElementById(`sizeContainer-${productNum}`);
+            
+            if (!flavourSelect || !sizeContainer) return;
+            
+            const selectedType = productSelect.value;
+            const selectedOption = flavourSelect.options[flavourSelect.selectedIndex];
+            const category = selectedOption.dataset.category;
+            
+            if (!category) {
+                sizeContainer.innerHTML = '';
+                return;
+            }
+            
+            const config = productTypes[selectedType];
+            
+            // For Cakesicles, no size needed - it's priced per item
+            if (selectedType === 'Cakesicles') {
+                const minQty = config.minQuantity || 1;
+                sizeContainer.innerHTML = `
+                    <div class="form-group">
+                        <p style="color: var(--gold); font-weight: 600; margin: 0.5rem 0;">Price: ${category}</p>
+                        <p style="font-size: 0.9rem; font-style: italic; color: var(--gold); margin-top: 0.5rem;">Minimum order: ${minQty}</p>
+                    </div>
+                `;
+                
+                // Set minimum quantity on the quantity input
+                const quantityInput = productDiv.querySelector('.quantity-input');
+                if (quantityInput) {
+                    quantityInput.min = minQty;
+                    quantityInput.value = minQty;
+                }
+                return;
+            }
+            
+            // For Cupcakes, show size based on category
+            if (config.sizes && config.sizes[category]) {
+                sizeContainer.innerHTML = `
+                    <div class="form-group">
+                        <label>Size *</label>
+                        <select required class="size-select">
+                            <option value="">-- Choose size --</option>
+                            ${config.sizes[category].map(size => `<option value="${size}">${size}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            }
+        }
+        
+        // Update size based on selected keto treat type
+        window.updateKetoSize = function(productNum) {
+            const productDiv = document.getElementById(`bakeryProduct-${productNum}`);
+            const typeSelect = productDiv.querySelector('.type-select');
+            const sizeContainer = document.getElementById(`ketoSizeContainer-${productNum}`);
+            
+            if (!typeSelect || !sizeContainer) return;
+            
+            const selectedType = typeSelect.value;
+            if (!selectedType) {
+                sizeContainer.innerHTML = '';
+                return;
+            }
+            
+            const config = productTypes['Keto Treats'];
+            const sizes = config.sizes[selectedType];
+            const minQty = config.minQuantity && config.minQuantity[selectedType] ? config.minQuantity[selectedType] : 1;
+            
+            if (sizes) {
+                if (Array.isArray(sizes)) {
+                    sizeContainer.innerHTML = `
+                        <div class="form-group">
+                            <label>Size *</label>
+                            <select required class="size-select">
+                                <option value="">-- Choose size --</option>
+                                ${sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                } else {
+                    // Single price (like Almond Cakesicles or Mix Keto Treat Box)
+                    const minQtyNote = minQty > 1 ? `<p style="font-size: 0.9rem; font-style: italic; color: var(--gold); margin-top: 0.5rem;">Minimum order: ${minQty}</p>` : '';
+                    sizeContainer.innerHTML = `
+                        <div class="form-group">
+                            <p style="color: var(--gold); font-weight: 600; margin: 0.5rem 0;">Price: ${sizes}</p>
+                            <input type="hidden" class="size-select" value="${sizes}">
+                            ${minQtyNote}
+                        </div>
+                    `;
+                }
+                
+                // Update quantity field minimum if it exists
+                const quantityInput = productDiv.querySelector('.quantity-input');
+                if (quantityInput && minQty > 1) {
+                    quantityInput.min = minQty;
+                    quantityInput.value = minQty;
+                }
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('bakeryOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default submission
+            
+            console.log('Bakery form submitting, collecting item data...');
+            
+            const bakeryItems = [];
+            const productDivs = document.querySelectorAll('.product-order-item');
+            
+            console.log(`Found ${productDivs.length} bakery item(s)`);
+            
+            productDivs.forEach((div, idx) => {
+                const productType = div.querySelector('.product-type-select')?.value;
+                if (!productType) return;
+                
+                const item = { product: productType };
+                
+                // Get all the dynamic field values
+                const type = div.querySelector('.type-select')?.value;
+                const size = div.querySelector('.size-select')?.value;
+                const sponge = div.querySelector('.sponge-select')?.value;
+                const icing = div.querySelector('.icing-select')?.value;
+                const filling = div.querySelector('.filling-select')?.value;
+                const flavour = div.querySelector('.flavour-select')?.value;
+                const quantity = div.querySelector('.quantity-input')?.value;
+                
+                console.log(`Item ${idx + 1}:`, { productType, type, flavour, size, sponge, icing, filling, quantity });
+                
+                if (type) item.type = type;
+                if (flavour) item.flavour = flavour;
+                if (size) item.size = size;
+                if (sponge) item.sponge = sponge;
+                if (icing) item.icing = icing;
+                if (filling) item.filling = filling;
+                if (quantity) item.quantity = quantity;
+                
+                bakeryItems.push(item);
+            });
+            
+            // Format as readable text
+            let itemsText = '';
+            if (bakeryItems.length === 0) {
+                itemsText = 'No items selected';
+            } else {
+                bakeryItems.forEach((item, index) => {
+                    itemsText += `${index + 1}. ${item.product}`;
+                    if (item.type) itemsText += ` - Type: ${item.type}`;
+                    if (item.flavour) itemsText += ` - Flavour: ${item.flavour}`;
+                    if (item.size) itemsText += ` - ${item.size}`;
+                    if (item.sponge) itemsText += ` - Sponge: ${item.sponge}`;
+                    if (item.icing) itemsText += ` - Icing: ${item.icing}`;
+                    if (item.filling) itemsText += ` - Filling: ${item.filling}`;
+                    itemsText += ` - Quantity: ${item.quantity}\n`;
+                });
+            }
+            
+            console.log('Items text:', itemsText);
+            
+            document.getElementById('bakeryItemsData').value = itemsText;
+            
+            console.log('Items data set to hidden field');
+            
+            // Submit to Netlify
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                console.log('Form submitted successfully');
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+                // Clear products container
+                document.getElementById('bakeryProductsContainer').innerHTML = '';
+                // Add first product back
+                addBakeryProduct();
+            })
+            .catch((error) => {
+                // Even on "error", form likely submitted (Netlify redirect causes CORS error)
+                console.log('Fetch error (likely success):', error);
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            });
+        });
+
+        // Add event listener for Add Item button
+        document.addEventListener('DOMContentLoaded', function() {
+            const addBtn = document.getElementById('addBakeryItemBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', addBakeryProduct);
+            }
+            
+            // Add first product by default
+            addBakeryProduct();
+        });
+    </script>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-checkmark"></div>
+            
+            <h2>Enquiry Sent!</h2>
+            
+            <p>Thank you for contacting MK Patisserie.</p>
+            <p>We've received your enquiry and will aim to get back to you within <strong style="color: var(--gold);">48 hours</strong>.</p>
+            <p style="font-size: 1rem; opacity: 0.9; margin-top: 1rem;">We look forward to speaking with you soon!</p>
+            
+            <button class="success-modal-close" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Success modal functions
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSuccessModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

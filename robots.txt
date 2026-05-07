@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mkpatisserie.co.uk/sitemap.xml
+
+# Disallow CMS admin pages
+Disallow: /events-cms.html
+Disallow: /occasions-cms.html
+
+# Allow all images
+Allow: /Images/
+Allow: /logos/
+
+# Crawl-delay
+Crawl-delay: 1

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occasions CMS | MK Patisserie</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .cms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--cream);
+            min-height: 100vh;
+        }
+
+        .cms-header {
+            background: var(--black);
+            color: var(--cream);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .cms-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .cms-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: var(--black);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .occasions-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .occasion-item {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .occasion-info h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .occasion-info p {
+            color: #666;
+            margin: 0.25rem 0;
+        }
+
+        .occasion-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-upload-label {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .file-upload-label:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .file-preview {
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .file-preview img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-published {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-draft {
+            background: #ffc107;
+            color: var(--black);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gold);
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cms-container">
+        <div class="cms-header">
+            <h1>Occasions CMS</h1>
+            <p>Manage your occasions and products</p>
+        </div>
+
+        <!-- Authentication Section -->
+        <div id="authSection" class="auth-section">
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <label for="adminEmail">Email</label>
+                <input type="email" id="adminEmail" placeholder="admin@mkpatisserie.com">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword">
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+        </div>
+
+        <!-- CMS Content (Hidden until authenticated) -->
+        <div id="cmsContent" class="hidden">
+            <div style="text-align: right; margin-bottom: 1rem;">
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Add/Edit Occasion Form -->
+            <div class="cms-form">
+                <h2 id="formTitle">Add New Occasion</h2>
+                <div id="formMessage"></div>
+                
+                <form id="occasionForm">
+                    <div class="form-group">
+                        <label for="title">Occasion Title *</label>
+                        <input type="text" id="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Event Date (optional)</label>
+                        <input type="date" id="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location (optional)</label>
+                        <input type="text" id="location" placeholder="e.g., Leicester City Centre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Time (optional)</label>
+                        <input type="text" id="time" placeholder="e.g., 2:00 PM - 6:00 PM">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mainImage">Main Image *</label>
+                        <label for="mainImageInput" class="file-upload-label">Choose Image</label>
+                        <input type="file" id="mainImageInput" accept="image/*" style="display: none;" onchange="previewImage(this, 'mainImagePreview')">
+                        <div id="mainImagePreview" class="file-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="optionsMenu">Options Menu (optional)</label>
+                        <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Upload a menu image with pricing and options for this occasion</p>
+                        <label for="optionsMenuInput" class="file-upload-label">Choose Menu Image</label>
+                        <input type="file" id="optionsMenuInput" accept="image/*" style="display: none;" onchange="previewImage(this, 'optionsMenuPreview')">
+                        <div id="optionsMenuPreview" class="file-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" required>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ctaText">CTA Button Text (optional)</label>
+                        <input type="text" id="ctaText" placeholder="e.g., Learn More">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ctaLink">CTA Button Link (optional)</label>
+                        <input type="url" id="ctaLink" placeholder="https://...">
+                    </div>
+
+                    <button type="submit" class="btn">Save Occasion</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()" style="margin-left: 1rem;">Cancel</button>
+                </form>
+            </div>
+
+            <!-- Occasions List -->
+            <div class="occasions-list">
+                <h2>Your Occasions</h2>
+                <div id="occasionsList">
+                    <div class="loading">Loading occasions...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDm72iZcExKNPMXnXReXqvy2-fHZArKPZQ",
+            authDomain: "mk-patisserie-events.firebaseapp.com",
+            projectId: "mk-patisserie-events",
+            storageBucket: "mk-patisserie-events.firebasestorage.app",
+            messagingSenderId: "863053781858",
+            appId: "1:863053781858:web:8877e7a9ebbe84e199aa3b"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        let currentOccasionId = null;
+
+        // Authentication
+        function login() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    showMessage('formMessage', 'Login successful!', 'success');
+                    document.getElementById('authSection').classList.add('hidden');
+                    document.getElementById('cmsContent').classList.remove('hidden');
+                    loadOccasions();
+                })
+                .catch(error => {
+                    showMessage('formMessage', 'Login failed: ' + error.message, 'error');
+                });
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                document.getElementById('authSection').classList.remove('hidden');
+                document.getElementById('cmsContent').classList.add('hidden');
+                resetForm();
+            });
+        }
+
+        // Check authentication state
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('authSection').classList.add('hidden');
+                document.getElementById('cmsContent').classList.remove('hidden');
+                loadOccasions();
+            }
+        });
+
+        // Preview image
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <div style="position: relative; display: inline-block;">
+                            <img src="${e.target.result}" alt="Preview">
+                            <button type="button" onclick="removePreviewImage('${previewId}', '${input.id}')" 
+                                    style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold; font-size: 18px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                                ×
+                            </button>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Remove preview image and clear file input
+        function removePreviewImage(previewId, inputId) {
+            document.getElementById(previewId).innerHTML = '';
+            document.getElementById(inputId).value = '';
+        }
+
+        // Upload image to Firebase Storage
+        async function uploadImage(file, path) {
+            const storageRef = storage.ref();
+            const imageRef = storageRef.child(`occasions/${path}/${Date.now()}_${file.name}`);
+            await imageRef.put(file);
+            return await imageRef.getDownloadURL();
+        }
+
+        // Save Occasion
+        document.getElementById('occasionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            try {
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const dateInput = document.getElementById('date').value;
+                const location = document.getElementById('location').value;
+                const time = document.getElementById('time').value;
+                const status = document.getElementById('status').value;
+                const ctaText = document.getElementById('ctaText').value;
+                const ctaLink = document.getElementById('ctaLink').value;
+                
+                // Upload main image
+                const mainImageInput = document.getElementById('mainImageInput');
+                let imageUrl = null;
+                if (mainImageInput.files.length > 0) {
+                    showMessage('formMessage', 'Uploading main image...', 'success');
+                    imageUrl = await uploadImage(mainImageInput.files[0], 'main');
+                }
+
+                // Upload options menu if provided
+                const optionsMenuInput = document.getElementById('optionsMenuInput');
+                let optionsMenuUrl = null;
+                if (optionsMenuInput.files.length > 0) {
+                    showMessage('formMessage', 'Uploading options menu...', 'success');
+                    optionsMenuUrl = await uploadImage(optionsMenuInput.files[0], 'menus');
+                }
+
+                const occasionData = {
+                    title,
+                    description,
+                    date: dateInput ? firebase.firestore.Timestamp.fromDate(new Date(dateInput)) : null,
+                    location,
+                    time,
+                    status,
+                    ctaText,
+                    ctaLink,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                if (imageUrl) occasionData.imageUrl = imageUrl;
+                if (optionsMenuUrl) occasionData.optionsMenuUrl = optionsMenuUrl;
+
+                if (currentOccasionId) {
+                    // Update existing occasion
+                    await db.collection('events').doc(currentOccasionId).update(occasionData);
+                    showMessage('formMessage', 'Occasion updated successfully!', 'success');
+                } else {
+                    // Create new occasion
+                    occasionData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('events').add(occasionData);
+                    showMessage('formMessage', 'Occasion created successfully!', 'success');
+                }
+
+                resetForm();
+                loadOccasions();
+            } catch (error) {
+                showMessage('formMessage', 'Error: ' + error.message, 'error');
+            }
+        });
+
+        // Load occasions
+        async function loadOccasions() {
+            const list = document.getElementById('occasionsList');
+            list.innerHTML = '<div class="loading">Loading occasions...</div>';
+
+            try {
+                const snapshot = await db.collection('events').orderBy('createdAt', 'desc').get();
+                
+                if (snapshot.empty) {
+                    list.innerHTML = '<p style="text-align: center; color: #666;">No occasions yet. Create your first one!</p>';
+                    return;
+                }
+
+                list.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const occasion = doc.data();
+                    const occasionHtml = `
+                        <div class="occasion-item">
+                            <div class="occasion-info">
+                                <h3>${occasion.title}</h3>
+                                <p>${occasion.description.substring(0, 100)}...</p>
+                                <p><span class="status-badge status-${occasion.status}">${occasion.status.toUpperCase()}</span></p>
+                                ${occasion.optionsMenuUrl ? '<p style="color: var(--gold); font-weight: 600;">✓ Options Menu Uploaded</p>' : ''}
+                            </div>
+                            <div class="occasion-actions">
+                                <button class="btn" onclick="editOccasion('${doc.id}')">Edit</button>
+                                <button class="btn btn-danger" onclick="deleteOccasion('${doc.id}', '${occasion.title}')">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    list.innerHTML += occasionHtml;
+                });
+            } catch (error) {
+                list.innerHTML = '<p class="error-message">Error loading occasions: ' + error.message + '</p>';
+            }
+        }
+
+        // Edit occasion
+        async function editOccasion(id) {
+            currentOccasionId = id;
+            document.getElementById('formTitle').textContent = 'Edit Occasion';
+            
+            const doc = await db.collection('events').doc(id).get();
+            const occasion = doc.data();
+
+            document.getElementById('title').value = occasion.title;
+            document.getElementById('description').value = occasion.description;
+            if (occasion.date) {
+                const date = occasion.date.toDate();
+                document.getElementById('date').value = date.toISOString().split('T')[0];
+            }
+            document.getElementById('location').value = occasion.location || '';
+            document.getElementById('time').value = occasion.time || '';
+            document.getElementById('status').value = occasion.status;
+            document.getElementById('ctaText').value = occasion.ctaText || '';
+            document.getElementById('ctaLink').value = occasion.ctaLink || '';
+
+            if (occasion.imageUrl) {
+                document.getElementById('mainImagePreview').innerHTML = `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="${occasion.imageUrl}" alt="Current Image">
+                        <button type="button" onclick="removePreviewImage('mainImagePreview', 'mainImageInput')" 
+                                style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold; font-size: 18px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                            ×
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (occasion.optionsMenuUrl) {
+                document.getElementById('optionsMenuPreview').innerHTML = `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="${occasion.optionsMenuUrl}" alt="Current Menu">
+                        <button type="button" onclick="removePreviewImage('optionsMenuPreview', 'optionsMenuInput')" 
+                                style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold; font-size: 18px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                            ×
+                        </button>
+                    </div>
+                `;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Delete occasion
+        async function deleteOccasion(id, title) {
+            if (confirm(`Are you sure you want to delete "${title}"?`)) {
+                try {
+                    await db.collection('events').doc(id).delete();
+                    showMessage('formMessage', 'Occasion deleted successfully!', 'success');
+                    loadOccasions();
+                } catch (error) {
+                    showMessage('formMessage', 'Error deleting occasion: ' + error.message, 'error');
+                }
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            currentOccasionId = null;
+            document.getElementById('formTitle').textContent = 'Add New Occasion';
+            document.getElementById('occasionForm').reset();
+            document.getElementById('mainImagePreview').innerHTML = '';
+            document.getElementById('optionsMenuPreview').innerHTML = '';
+            document.getElementById('formMessage').innerHTML = '';
+        }
+
+        // Show message
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="${type}-message">${message}</div>`;
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

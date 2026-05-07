@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>MK Patisserie | Event Styling, Catering & Bakery in Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="MK Patisserie - Leicester's premier bakery and event styling service. Bespoke cakes, catering, event planning and workshops. Founded 2019. Order custom cakes and event services.">
+    <meta name="keywords" content="bakery Leicester, event planning Leicester, catering Leicester, custom cakes, bespoke cakes, cake jars, cakesicles, workshops, event styling">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MK Patisserie | Event Styling, Catering & Bakery in Leicester">
+    <meta property="og:description" content="Leicester's premier bakery and event styling service. Custom cakes, catering, event planning and workshops.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MK Patisserie | Event Styling, Catering & Bakery in Leicester">
+    <meta name="twitter:description" content="Leicester's premier bakery and event styling service. Custom cakes, catering, event planning and workshops.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+    
+    <!-- Structured Data - Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "MK Patisserie",
+      "description": "Premier bakery and event styling service in Leicester offering bespoke cakes, catering, and event planning",
+      "url": "https://mkpatisserie.co.uk",
+      "logo": "https://mkpatisserie.co.uk/logos/logo.png",
+      "image": "https://mkpatisserie.co.uk/logos/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Leicester",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "addressCountry": "GB"
+      },
+      "priceRange": "££",
+      "servesCuisine": "Bakery",
+      "foundingDate": "2019",
+      "sameAs": [
+        "https://www.instagram.com/mk.patisserie"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Cakes",
+            "description": "Bespoke cakes for weddings, birthdays, and special occasions"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Event Planning & Styling",
+            "description": "Complete event management and styling services"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Catering Services",
+            "description": "Professional catering for events and celebrations"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* Success Popup Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success-modal.active {
+            display: flex;
+        }
+        
+        .success-modal-content {
+            background: var(--black);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .success-checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .success-modal h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-modal p {
+            color: var(--cream);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-modal-close {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .success-modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        /* Static Occasion Strip (below rotating banner) */
+        .occasion-strip {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding: 1.2rem 2rem;
+            text-align: center;
+        }
+
+        .occasion-strip-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .occasion-strip-text {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+        }
+
+        .occasion-strip-button {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .occasion-strip-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .occasion-strip {
+                padding: 1rem 1.5rem;
+            }
+
+            .occasion-strip-content {
+                gap: 1rem;
+            }
+
+            .occasion-strip-text {
+                font-size: 1.1rem;
+            }
+
+            .occasion-strip-button {
+                padding: 0.7rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .occasion-strip {
+                padding: 0.8rem 1rem;
+            }
+
+            .occasion-strip-text {
+                font-size: 1rem;
+            }
+
+            .occasion-strip-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .occasion-banner {
+                padding: 1rem;
+            }
+            
+            .occasion-banner-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Events, Styling & Sweet Creations</h1>
+            <p>Bespoke Events • Luxury Grazing • Custom Cakes • Bento Workshops</p>
+            <p class="tagline">Where Every Celebration Becomes a Masterpiece</p>
+            <a href="#contact-form" class="cta-button">Book Your Event Styling</a>
+        </div>
+    </section>
+
+    <!-- Moving Banner -->
+    <div class="moving-banner">
+        <div class="banner-content">
+            5 Star Food Hygiene • Bento Workshops in Leicester • Event Styling & Catering • We Travel Nationwide • Bespoke Events • 5 Star Food Hygiene • Bento Workshops in Leicester • Event Styling & Catering • We Travel Nationwide • Bespoke Events • 5 Star Food Hygiene • Bento Workshops in Leicester • Event Styling & Catering • We Travel Nationwide • Bespoke Events •
+        </div>
+    </div>
+
+    <!-- Static Occasion Strip (CMS-Controlled) -->
+    <div id="occasionStrip" class="occasion-strip" style="display: none;">
+        <div class="occasion-strip-content">
+            <p class="occasion-strip-text" id="stripText"></p>
+            <a href="occasions.html" class="occasion-strip-button">Order Now</a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-inner">
+            <h2 class="section-title">About MK</h2>
+            <p class="section-subtitle">Our Story</p>
+            <div class="about-content-with-image">
+                <div class="about-image">
+                    <img src="Images/about.jpg" alt="Medina - MK Patisserie Founder">
+                </div>
+                <div class="about-text">
+                    <p>Since 2019, MK Patisserie has evolved from a small cake studio into a premier event planning and catering company. Born from a genuine love for creating beautiful, memorable flavours, we've grown to offer everything from bespoke desserts to complete event experiences. Each project reflects our commitment to refined aesthetics, seamless execution, and the art of bringing people together through moments that feel truly elevated and unforgettable.</p>
+                    <p style="text-align: center; margin-top: 2rem;"><a href="about.html" class="cta-button">Learn More About Us</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-inner">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">What We Offer</p>
+            <div class="services-grid">
+                <a href="catering.html" class="service-card">
+                    <h3>Catering</h3>
+                    <p>Elevated event catering for intimate gatherings to grand celebrations. From canapés to full event menus.</p>
+                    <span class="service-card-cta">View Menus →</span>
+                </a>
+                <a href="bakery.html" class="service-card">
+                    <h3>Bakery</h3>
+                    <p>Bespoke baked creations including custom cakes, cupcakes, cakesicles, and keto treats.</p>
+                    <span class="service-card-cta">View Products →</span>
+                </a>
+                <a href="workshops.html" class="service-card">
+                    <h3>Bento Workshops</h3>
+                    <p>Learn the art of beautiful, functional lunch preparation in hands-on workshops.</p>
+                    <span class="service-card-cta">Learn More →</span>
+                </a>
+                <a href="events.html" class="service-card">
+                    <h3>Event Planning & Styling</h3>
+                    <p>Complete event experiences with professional planning, styling, décor, and seamless execution.</p>
+                    <span class="service-card-cta">View Services →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Carousel -->
+    <section id="featured-gallery">
+        <div class="section-inner">
+            <h2 class="section-title">Featured Work</h2>
+            <p class="section-subtitle">A Glimpse of Our Creations</p>
+            <div class="gallery-carousel">
+                <div class="gallery-track">
+<div class="gallery-item">
+                        <img src="Images/bakery/cake1.webp" alt="Elegant cake">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/graze/graze4.webp" alt="Event setup">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/bakery/cake19.webp" alt="Cupcakes">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/desserttable/dessert01.jpeg" alt="Catering spread">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/CateringNew09.webp" alt="Cake decoration">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/CateringNew48.webp" alt="Event food">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/graze/graze5.webp" alt="Dessert table">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/catering/catering22.webp" alt="Catering">
+                    </div>
+                    <!-- Duplicate for infinite scroll -->
+<div class="gallery-item">
+                        <img src="Images/bakery/cake1.webp" alt="Elegant cake">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/graze/graze4.webp" alt="Event setup">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/bakery/cake19.webp" alt="Cupcakes">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/desserttable/dessert01.jpeg" alt="Catering spread">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/CateringNew09.webp" alt="Cake decoration">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/CateringNew48.webp" alt="Event food">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/graze/graze5.webp" alt="Dessert table">
+                    </div>
+<div class="gallery-item">
+                        <img src="Images/catering/catering22.webp" alt="Catering">
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="gallery.html" class="cta-button">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews">
+        <div class="section-inner">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">5-Star Reviews From Happy Customers</p>
+            
+            <div class="reviews-carousel">
+                <div class="reviews-track">
+                    <div class="review-card">
+                        <p class="review-text">"The cakes were amazing! Honestly, everything was so nice and fresh, I loved the coconut cakesicles, something I would order again 👌"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Thank you for the cake. It tasted so good. And my bhabhi really appreciated it. Jazakallah for the time and effort you put in the cake. I hope allah gives this business of yours more barakah 😊"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Thanks for the cake my darling! Tasted lushh as alwayss 😍😍❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Omgggg those cakesicles are something else, my favorite!!! Soooo delish I'm definitely gonna order more soon!!!!! 😊🔥🔥🔥❤️❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Omg thank you so so so much for the most amazing box ever you shouldnt have done that my love 😊 looks absolutely amazing I can't wait for iftar now May Allah bless you so much and reward you!!! you are one amazing superwoman with a heart of gold so blessed to know you, love you so much you are so beautiful inside and out so beyond talented mashallah ❤️❤️❤️❤️❤️❤️❤️❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"The cake was amazing medina, it tasted as good as it looked! Sent some to my sisters too they all loved it. Thanks once again 😘 hope to see u soon inshallah xxx"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"My friends received the treat box and they said it looked delicious and tooo good to eat! they can't wait to try it x thank you for your amazing service inshAllah you get loads of barakah in your business. Ameen. x"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"The treat box was so beautiful ma sha Allah. The cakeisicles were soo tasty and moist. Jazakallah. Definitely be ordering again.. Thank you!"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"OMG 1st time I've tried the cakesickles they ARE delicious definitely be ordering more 😊"</p>
+                    </div>
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="review-card">
+                        <p class="review-text">"Glad I ordered in time 😊 can't wait too diggg innn"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Awww bless you cc ❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Thanks for the cake my darling! Tasted lushh as alwayss 😍😍❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Omgggg those cakesicles are something else, my favorite!!! Soooo delish I'm definitely gonna order more soon!!!!! 😊🔥🔥🔥❤️❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Omg thank you so so so much for the most amazing box ever you shouldnt have done that my love 😊 looks absolutely amazing I can't wait for iftar now May Allah bless you so much and reward you!!! you are one amazing superwoman with a heart of gold so blessed to know you, love you so much you are so beautiful inside and out so beyond talented mashallah ❤️❤️❤️❤️❤️❤️❤️❤️❤️"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"The cake was amazing medina, it tasted as good as it looked! Sent some to my sisters too they all loved it. Thanks once again 😘 hope to see u soon inshallah xxx"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"salaam sis, my friends received the treat box and they said it looked delicious and tooo good to eat! they can't wait to try it x thank you for your amazing service inshAllah you get loads of barakah in your business. Ameen. x"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"Salaams, so sorry been meaning to message. The treat box was so beautiful ma sha Allah. The cakeisicles were soo tasty and moist. Jazakallah. Definitely be ordering again.. Thank you!"</p>
+                    </div>
+                    <div class="review-card">
+                        <p class="review-text">"OMG 1st time I've tried the cakesickles they ARE delicious definitely be ordering more 😊"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form">
+        <div class="section-inner">
+            <h2 class="section-title">Start Your Moment</h2>
+            <p class="section-subtitle">Let's Create Something Beautiful Together</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+                        </svg>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Based in Leicester<br>Nationwide travel for events<br>Delivery & collection within Leicester</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        <div>
+                            <h3>Social Media</h3>
+                            <p>Instagram: @mkpatisserieltd<br>DM us for all enquiries<br>Follow for updates & inspiration</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <div>
+                            <h3>Our Promise</h3>
+                            <p>5 Star Food Hygiene Rating<br>Professional Event Styling<br>Bespoke Solutions<br>Response within 24-48 hours</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <div class="form-header">
+                        <h3>Book Your Event Styling</h3>
+                        <p>Fill out the form and we'll get back to you within 24-48 hours</p>
+                    </div>
+                    <form name="event-styling-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="eventStylingForm">
+                        <!-- Honeypot field for spam protection -->
+                        <input type="hidden" name="bot-field" />
+                        <!-- Form name for Netlify -->
+                        <input type="hidden" name="form-name" value="event-styling-form" />
+                        <!-- Form type for identification -->
+                        <input type="hidden" name="form-type" value="Event Styling" />
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="07XXX XXXXXX" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="service-required">Service Required *</label>
+                                <select id="service-required" name="service-required" required>
+                                    <option value="">Select service</option>
+                                    <option value="event-planning">Event Planning</option>
+                                    <option value="event-styling">Event Styling</option>
+                                    <option value="planning-and-styling">Event Planning & Styling</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="event-type">Event Type *</label>
+                                <select id="event-type" name="event-type" required>
+                                    <option value="">Select event type</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="baby-shower">Baby Shower</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Event Date *</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests *</label>
+                                <input type="number" id="guests" name="guests" placeholder="e.g., 50" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="location">Event Location *</label>
+                                <input type="text" id="location" name="location" placeholder="City or venue" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Event Details *</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your event - theme, colors, menu preferences, special requirements, allergies..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-checkmark"></div>
+            
+            <h2>Enquiry Sent!</h2>
+            
+            <p>Thank you for contacting MK Patisserie.</p>
+            <p>We've received your enquiry and will aim to get back to you within <strong style="color: var(--gold);">48 hours</strong>.</p>
+            <p style="font-size: 1rem; opacity: 0.9; margin-top: 1rem;">We look forward to speaking with you soon!</p>
+            
+            <button class="success-modal-close" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Success modal functions
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSuccessModal();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('eventStylingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            })
+            .catch((error) => {
+                // Even on "error", form likely submitted (Netlify redirect causes CORS error)
+                console.log('Fetch error (likely success):', error);
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            });
+        });
+    </script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Initialize Firebase - Updated to match events-cms.html Firebase project
+        const firebaseConfig = {
+            apiKey: "AIzaSyDm72iZcExKNPMXnXReXqvy2-fHZArKPZQ",
+            authDomain: "mk-patisserie-events.firebaseapp.com",
+            projectId: "mk-patisserie-events",
+            storageBucket: "mk-patisserie-events.firebasestorage.app",
+            messagingSenderId: "878328721303",
+            appId: "1:878328721303:web:7e0e3a61ba52a8f07c8ae1"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Load and display homepage occasion strip from Firestore
+        async function loadOccasionStrip() {
+            try {
+                const eventsRef = db.collection('events');
+                const query = eventsRef
+                    .where('showOnHomepage', '==', true)
+                    .where('status', '==', 'published')
+                    .limit(1);
+                
+                const snapshot = await query.get();
+                
+                if (!snapshot.empty) {
+                    const eventData = snapshot.docs[0].data();
+                    
+                    // Combine title and subtitle into one line
+                    const stripText = `${eventData.bannerTitle || ''} - ${eventData.bannerSubtitle || ''}`;
+                    document.getElementById('stripText').textContent = stripText;
+                    
+                    // Show strip
+                    document.getElementById('occasionStrip').style.display = 'block';
+                } else {
+                    // No strip to show
+                    document.getElementById('occasionStrip').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading occasion strip:', error);
+                // Hide strip on error
+                document.getElementById('occasionStrip').style.display = 'none';
+            }
+        }
+        
+        // Load strip when page loads
+        document.addEventListener('DOMContentLoaded', loadOccasionStrip);
+    </script>
+</body>
+</html>

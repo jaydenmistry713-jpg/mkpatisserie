@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>About Us - Our Story | MK Patisserie Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="About MK Patisserie - Founded 2019 in Leicester. Our story, values, and commitment to quality baking and event styling services.">
+    <meta name="keywords" content="about MK Patisserie, Leicester bakery, our story, small business Leicester">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/about">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About Us - Our Story | MK Patisserie Leicester">
+    <meta property="og:description" content="About MK Patisserie - Founded 2019 in Leicester. Our story, values, and commitment to quality baking and event styling services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/about">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us - Our Story | MK Patisserie Leicester">
+    <meta name="twitter:description" content="About MK Patisserie - Founded 2019 in Leicester. Our story, values, and commitment to quality baking and event styling services.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-hero {
+            height: 50vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.88), rgba(26,26,26,0.82)),
+                        url('Images/catering/CateringNew09.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 73px;
+        }
+
+        .about-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .about-story {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .about-story-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-story-image {
+            width: 100%;
+        }
+
+        .about-story-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+            display: block;
+        }
+
+        .about-story-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .about-story-content p {
+            color: var(--cream);
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .about-values {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .values-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .value-icon svg {
+            color: var(--gold);
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+        }
+
+        .value-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: var(--cream);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-story {
+                padding: 3rem 1.5rem;
+            }
+
+            .about-story-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-story-image {
+                order: -1;
+            }
+
+            .about-story-content h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .about-story-content p {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>About MK</h1>
+            <p class="tagline">Our Story & Values</p>
+        </div>
+    </section>
+
+    <!-- About Story Section -->
+    <section class="about-story">
+        <div class="about-story-container">
+            <div class="about-story-image">
+                <img src="Images/about.jpg" alt="Medina - MK Patisserie Founder">
+            </div>
+            <div class="about-story-content">
+                <h2>Our Journey</h2>
+                <p>Founded in 2019, MK began as a small cake studio built on a love for creating beautiful, thoughtful flavours. What started with bespoke cakes soon grew into a wider world of desserts and baked goods — each year opening the door to something new.</p>
+                
+                <p>That steady evolution became part of the brand's DNA. As demand grew, so did the vision: from catering, to table styling, to full event experiences. Today, MK has grown into a modern event-planning and catering company, known for pairing refined aesthetics with seamless execution.</p>
+                
+                <p>What ties it all together is simple — a genuine passion for hosting, creating atmosphere, and bringing people together. Every project is crafted with care, intention, and a commitment to making moments feel elevated and unforgettable.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="about-values">
+        <div class="section-inner">
+            <h2 class="section-title">What Drives Us</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Quality & Care</h3>
+                    <p>Every creation is crafted with meticulous attention to detail, using premium ingredients and refined techniques.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Refined Aesthetics</h3>
+                    <p>We believe in the power of beautiful presentation, where visual artistry meets exceptional taste.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                        </svg>
+                    </div>
+                    <h3>Personal Touch</h3>
+                    <p>Your celebration is unique, and we tailor every element to reflect your vision and style.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Hygiene Rating Section -->
+    <section class="about-values" style="padding: 3rem 0;">
+        <div class="section-inner" style="text-align: center;">
+            <h2 class="section-title">Commitment to Food Safety</h2>
+            <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--cream); opacity: 0.9;">We maintain the highest standards of food hygiene and safety, earning the top rating from the Food Standards Agency.</p>
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating - Very Good" style="max-width: 450px; width: 100%; height: auto; margin: 0 auto; display: block; border-radius: 10px; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);">
+            <p style="margin-top: 1.5rem; color: var(--gold); font-weight: 600;">Rated 5 Stars - Very Good</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events CMS | MK Patisserie</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --gold: #D4AF37;
+            --light-gold: #E5C158;
+            --cream: #f5f5f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--black);
+            color: var(--cream);
+        }
+
+        .cms-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .cms-header {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cms-header h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cms-header p {
+            color: var(--cream);
+            opacity: 0.8;
+        }
+
+        .auth-section {
+            background: var(--dark-gray);
+            padding: 3rem;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 4rem auto;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .auth-section h2 {
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--cream);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(245, 245, 240, 0.4);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-danger {
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: rgba(220, 53, 69, 1);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .event-form {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .event-form h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .events-list {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .events-list h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .event-item h4 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-item p {
+            color: var(--cream);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .event-item-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .event-item-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-published {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .status-draft {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            background: rgba(212, 175, 55, 0.3);
+        }
+
+        .success-message,
+        .error-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+
+        #authSection { display: block; }
+        #cmsSection { display: none; }
+
+        /* Product Fields */
+        .product-item {
+            background: rgba(26, 26, 26, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .product-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-item-header h4 {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .remove-product-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-product-btn:hover {
+            background: #c82333;
+        }
+
+        .product-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Product Image Previews */
+        .product-image-previews {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .product-image-preview-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .product-image-preview-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image-preview-item .remove-image-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .product-image-preview-item .remove-image-btn:hover {
+            background: rgba(200, 35, 51, 1);
+        }
+
+        .product-image-preview-item .existing-image-badge {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background: rgba(40, 167, 69, 0.9);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-bar {
+                flex-direction: column;
+            }
+
+            .event-item-actions {
+                flex-direction: column;
+            }
+
+            .product-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#D4AF37">
+    <meta name="theme-color" content="#D4AF37">
+</head>
+<body>
+    <!-- Authentication Section -->
+    <div id="authSection">
+        <div class="auth-section">
+            <h2>MK Patisserie Events CMS</h2>
+            <div class="form-group">
+                <label for="authEmail">Email</label>
+                <input type="email" id="authEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="authPassword">Password</label>
+                <div style="position: relative;">
+                    <input type="password" id="authPassword" placeholder="Enter your password" style="padding-right: 60px;">
+                    <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gold); font-size: 0.85rem; padding: 5px; font-weight: 600; text-decoration: underline;">
+                        <span id="toggleIcon">Show</span>
+                    </button>
+                </div>
+            </div>
+            <button onclick="login()" class="btn btn-primary btn-full">Sign In</button>
+            <div id="authError" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
+    <!-- CMS Dashboard -->
+    <div id="cmsSection">
+        <div class="cms-container">
+            <div class="cms-header">
+                <h1>Events Management</h1>
+                <p>Manage your upcoming events and seasonal celebrations</p>
+            </div>
+
+            <div class="actions-bar">
+                <button onclick="showEventForm()" class="btn btn-primary">+ Add New Event</button>
+                <button onclick="logout()" class="btn logout-btn">Sign Out</button>
+            </div>
+
+            <div id="messageContainer"></div>
+
+            <!-- Event Form -->
+            <div id="eventFormContainer" style="display: none;">
+                <div class="event-form">
+                    <h3 id="formTitle">Add New Event</h3>
+                    <form id="eventForm">
+                        <div class="form-group">
+                            <label for="eventTitle">Event Title *</label>
+                            <input type="text" id="eventTitle" required placeholder="e.g., Easter Celebration 2024">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventDescription">Description *</label>
+                            <textarea id="eventDescription" required placeholder="Describe your event..."></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventDate">Event Date</label>
+                                <input type="date" id="eventDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTime">Event Time</label>
+                                <input type="time" id="eventTime" placeholder="e.g., 2:00 PM">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" placeholder="e.g., MK Patisserie Studio, Leicester">
+                        </div>
+
+                        <!-- Products Section -->
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>Event Products (Optional)</span>
+                                <button type="button" class="btn btn-secondary" onclick="toggleProductsSection()" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin: 0;">
+                                    <span id="productsToggleText">Show Products</span> (<span id="productCount">0</span>)
+                                </button>
+                            </label>
+                            <div id="productsSection" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(212, 175, 55, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2);">
+                                <div id="productsContainer">
+                                    <!-- Products will be added here dynamically -->
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="addProductField()" style="margin-top: 1rem;">+ Add Product</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventStatus">Status *</label>
+                            <select id="eventStatus" required>
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+
+                        <!-- Homepage Banner Section -->
+                        <div class="form-group" style="background: rgba(212, 175, 55, 0.05); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 1.5rem;">
+                            <label style="display: flex; align-items: center; cursor: pointer; font-size: 1.1rem; margin-bottom: 1rem;">
+                                <input type="checkbox" id="showOnHomepage" style="width: auto; margin-right: 10px; cursor: pointer;">
+                                <strong>Show as Homepage Banner</strong>
+                            </label>
+                            <p style="font-size: 0.95rem; color: #666; margin: 0 0 1rem 0; font-style: italic;">
+                                When enabled, this event will appear as a promotional banner on the homepage (e.g., Mother's Day, Easter, Ramadan, Christmas orders)
+                            </p>
+                            
+                            <div id="bannerFieldsSection" style="display: none;">
+                                <div class="form-group">
+                                    <label for="bannerTitle">Banner Title *</label>
+                                    <input type="text" id="bannerTitle" placeholder="e.g., 🌸 Mother's Day Orders Now Open!">
+                                    <small style="color: #666; font-size: 0.9rem; display: block; margin-top: 0.5rem;">Tip: Add an emoji for visual appeal (🌸 💐 🌙 🎄 🐣)</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bannerSubtitle">Banner Subtitle *</label>
+                                    <input type="text" id="bannerSubtitle" placeholder="e.g., Browse our special Mother's Day menu and order today">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Display Image *</label>
+                            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">This is the main image shown on the occasions page</p>
+                            <div class="file-input-wrapper">
+                                <label for="eventImage" class="file-input-label">Choose Display Image</label>
+                                <input type="file" id="eventImage" accept="image/*" onchange="previewImage(this)">
+                            </div>
+                            <div id="imagePreviewContainer" style="position: relative; display: inline-block; margin-top: 1rem;">
+                                <img id="imagePreview" class="image-preview" style="display: none;">
+                                <button type="button" id="imageDeleteBtn" onclick="removeEventImage()" 
+                                        style="display: none; position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold; font-size: 18px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                                    ×
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gallery Images (Optional)</label>
+                            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Upload or manage gallery images for this event</p>
+                            <div class="file-input-wrapper">
+                                <label for="galleryImages" class="file-input-label">Choose Gallery Images</label>
+                                <input type="file" id="galleryImages" accept="image/*" multiple onchange="previewGalleryImages(this)">
+                            </div>
+                            <div id="galleryPreview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.5rem; margin-top: 1rem;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Options Menu (Optional)</label>
+                            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Upload a menu image with pricing and options for this occasion</p>
+                            <div class="file-input-wrapper">
+                                <label for="optionsMenu" class="file-input-label">Choose Menu Image</label>
+                                <input type="file" id="optionsMenu" accept="image/*" onchange="previewMenuImage(this)">
+                            </div>
+                            <div id="menuPreviewContainer" style="position: relative; display: inline-block; margin-top: 1rem;">
+                                <img id="menuPreview" class="image-preview" style="display: none;">
+                                <button type="button" id="menuDeleteBtn" onclick="removeMenuImage()" 
+                                        style="display: none; position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold; font-size: 18px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+                                    ×
+                                </button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">Save Event</button>
+                            <button type="button" onclick="cancelEventForm()" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Events List -->
+            <div class="events-list">
+                <h3>All Events</h3>
+                <div id="eventsList">
+                    <p style="text-align: center; opacity: 0.6;">Loading events...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDm72iZcExKNPMXnXReXqvy2-fHZArKPZQ",
+            authDomain: "mk-patisserie-events.firebaseapp.com",
+            projectId: "mk-patisserie-events",
+            storageBucket: "mk-patisserie-events.firebasestorage.app",
+            messagingSenderId: "863053781858",
+            appId: "1:863053781858:web:8877e7a9ebbe84e199aa3b"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        let currentEventId = null;
+        let currentImageFile = null;
+
+        // Check authentication state
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('cmsSection').style.display = 'block';
+                loadEvents();
+            } else {
+                document.getElementById('authSection').style.display = 'block';
+                document.getElementById('cmsSection').style.display = 'none';
+            }
+        });
+
+        // Authentication
+        async function login() {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+            } catch (error) {
+                showAuthError(error.message);
+            }
+        }
+        
+        // Make login globally accessible
+        window.login = login;
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('authPassword');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = 'Show';
+            }
+        }
+        
+        window.togglePassword = togglePassword;
+
+        function logout() {
+            auth.signOut();
+        }
+        
+        window.logout = logout;
+
+        function showAuthError(message) {
+            document.getElementById('authError').innerHTML = 
+                `<div class="error-message">${message}</div>`;
+        }
+
+        // Event Form Management
+        function showEventForm() {
+            currentEventId = null;
+            currentGalleryFiles = [];
+            existingGalleryUrls = [];
+            document.getElementById('formTitle').textContent = 'Add New Event';
+            document.getElementById('eventForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('galleryPreview').innerHTML = '';
+            document.getElementById('eventFormContainer').style.display = 'block';
+            document.getElementById('eventsListContainer').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showEventsList() {
+            document.getElementById('eventsListContainer').style.display = 'block';
+            document.getElementById('eventFormContainer').style.display = 'none';
+            loadEvents();
+        }
+
+        function cancelEventForm() {
+            currentEventId = null;
+            currentImageFile = null;
+            currentMenuFile = null;
+            currentGalleryFiles = [];
+            existingGalleryUrls = [];
+            document.getElementById('eventForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('menuPreview').style.display = 'none';
+            document.getElementById('galleryPreview').innerHTML = '';
+            document.getElementById('eventFormContainer').style.display = 'none';
+            document.getElementById('productsContainer').innerHTML = '';
+        }
+
+        // Product Management Functions
+        let productCounter = 0;
+
+        function toggleProductsSection() {
+            const section = document.getElementById('productsSection');
+            const toggleText = document.getElementById('productsToggleText');
+            
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                toggleText.textContent = 'Hide Products';
+            } else {
+                section.style.display = 'none';
+                toggleText.textContent = 'Show Products';
+            }
+        }
+
+        function updateProductCount() {
+            const productItems = document.querySelectorAll('.product-item');
+            const count = productItems.length;
+            document.getElementById('productCount').textContent = count;
+        }
+
+        function addProductField(product = null) {
+            productCounter++;
+            const container = document.getElementById('productsContainer');
+            
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product-item';
+            productDiv.id = `product-${productCounter}`;
+            
+            productDiv.innerHTML = `
+                <div class="product-item-header">
+                    <h4>Product ${productCounter}</h4>
+                    <button type="button" class="remove-product-btn" onclick="removeProduct(${productCounter})">Remove</button>
+                </div>
+                <div class="product-row">
+                    <div class="form-group">
+                        <label>Product Name *</label>
+                        <input type="text" class="product-name" placeholder="e.g., Sunnah Graze Platters" value="${product?.name || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mini Price (£) - Optional</label>
+                        <input type="number" class="product-price-mini" placeholder="15.00" step="0.01" min="0" value="${product?.priceMini || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Small Price (£) - Optional</label>
+                        <input type="number" class="product-price-small" placeholder="25.00" step="0.01" min="0" value="${product?.priceSmall || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Large Price (£) - Optional</label>
+                        <input type="number" class="product-price-large" placeholder="35.00" step="0.01" min="0" value="${product?.priceLarge || ''}">
+                        <small style="font-size: 0.8rem; opacity: 0.7;">Enter at least one price</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Flavor Options (Optional)</label>
+                    <textarea class="product-flavors" placeholder="Enter flavors separated by commas (e.g., Chocolate, Vanilla, Strawberry)" rows="2">${product?.flavors ? product.flavors.join(', ') : ''}</textarea>
+                    <small style="font-size: 0.8rem; opacity: 0.7;">Separate each flavor with a comma</small>
+                </div>
+                <div class="form-group">
+                    <label>Product Images (Optional - Max 3)</label>
+                    <div class="file-input-wrapper">
+                        <label for="productImages-${productCounter}" class="file-input-label">Choose Images</label>
+                        <input type="file" id="productImages-${productCounter}" class="product-images" accept="image/*" multiple onchange="previewProductImages(${productCounter}, this)">
+                    </div>
+                    <div id="productImagePreviews-${productCounter}" class="product-image-previews"></div>
+                </div>
+            `;
+            
+            // If loading existing product with images, display them
+            if (product?.images && product.images.length > 0) {
+                container.appendChild(productDiv);
+                displayExistingProductImages(productCounter, product.images);
+            } else {
+                container.appendChild(productDiv);
+            }
+            
+            updateProductCount();
+        }
+
+        function removeProduct(id) {
+            const productDiv = document.getElementById(`product-${id}`);
+            if (productDiv) {
+                productDiv.remove();
+                updateProductCount();
+            }
+        }
+
+        // Product image preview
+        function previewProductImages(productId, input) {
+            const previewContainer = document.getElementById(`productImagePreviews-${productId}`);
+            previewContainer.innerHTML = '';
+            
+            if (input.files && input.files.length > 0) {
+                // Limit to 3 images
+                const filesToPreview = Array.from(input.files).slice(0, 3);
+                
+                filesToPreview.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgWrapper = document.createElement('div');
+                        imgWrapper.className = 'product-image-preview-item';
+                        imgWrapper.innerHTML = `
+                            <img src="${e.target.result}" alt="Product image ${index + 1}">
+                            <button type="button" class="remove-image-btn" onclick="removeProductImage(${productId}, ${index})">×</button>
+                        `;
+                        previewContainer.appendChild(imgWrapper);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        function displayExistingProductImages(productId, imageUrls) {
+            const previewContainer = document.getElementById(`productImagePreviews-${productId}`);
+            previewContainer.innerHTML = '';
+            
+            imageUrls.forEach((url, index) => {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.className = 'product-image-preview-item';
+                imgWrapper.innerHTML = `
+                    <img src="${url}" alt="Product image ${index + 1}">
+                    <span class="existing-image-badge">Saved</span>
+                `;
+                previewContainer.appendChild(imgWrapper);
+            });
+        }
+
+        function removeProductImage(productId, imageIndex) {
+            const input = document.getElementById(`productImages-${productId}`);
+            // Reset the input - user will need to re-select images
+            input.value = '';
+            previewProductImages(productId, input);
+        }
+
+        async function getProductsFromForm() {
+            const products = [];
+            const productItems = document.querySelectorAll('.product-item');
+            
+            for (const item of productItems) {
+                const name = item.querySelector('.product-name').value;
+                const priceMini = parseFloat(item.querySelector('.product-price-mini').value) || null;
+                const priceSmall = parseFloat(item.querySelector('.product-price-small').value) || null;
+                const priceLarge = parseFloat(item.querySelector('.product-price-large').value) || null;
+                const imageInput = item.querySelector('.product-images');
+                const flavorsText = item.querySelector('.product-flavors').value;
+                
+                if (name) {
+                    const product = {
+                        name,
+                        priceMini,
+                        priceSmall,
+                        priceLarge,
+                        imageFiles: imageInput?.files ? Array.from(imageInput.files).slice(0, 3) : [],
+                        // Preserve existing images if editing
+                        existingImages: []
+                    };
+                    
+                    // Parse flavors if provided
+                    if (flavorsText && flavorsText.trim()) {
+                        product.flavors = flavorsText.split(',').map(f => f.trim()).filter(f => f);
+                    }
+                    
+                    // Check for existing images in preview
+                    const previewContainer = item.querySelector('.product-image-previews');
+                    if (previewContainer) {
+                        const existingBadges = previewContainer.querySelectorAll('.existing-image-badge');
+                        if (existingBadges.length > 0) {
+                            const existingImgs = previewContainer.querySelectorAll('img');
+                            existingImgs.forEach(img => {
+                                product.existingImages.push(img.src);
+                            });
+                        }
+                    }
+                    
+                    products.push(product);
+                }
+            }
+            
+            return products;
+        }
+
+        // Upload product images to Firebase Storage
+        async function uploadProductImages(products) {
+            const productsWithUrls = [];
+            
+            for (const product of products) {
+                const productData = {
+                    name: product.name,
+                    priceMini: product.priceMini,
+                    priceSmall: product.priceSmall,
+                    priceLarge: product.priceLarge,
+                    images: product.existingImages || []
+                };
+                
+                // Include flavors if they exist
+                if (product.flavors && product.flavors.length > 0) {
+                    productData.flavors = product.flavors;
+                }
+                
+                // Upload new images if any
+                if (product.imageFiles && product.imageFiles.length > 0) {
+                    for (const file of product.imageFiles) {
+                        try {
+                            const imageRef = storage.ref().child(`products/${Date.now()}_${file.name}`);
+                            const snapshot = await imageRef.put(file);
+                            const downloadUrl = await snapshot.ref.getDownloadURL();
+                            productData.images.push(downloadUrl);
+                        } catch (error) {
+                            console.error('Error uploading product image:', error);
+                        }
+                    }
+                }
+                
+                productsWithUrls.push(productData);
+            }
+            
+            return productsWithUrls;
+        }
+
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const deleteBtn = document.getElementById('imageDeleteBtn');
+            if (input.files && input.files[0]) {
+                currentImageFile = input.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    deleteBtn.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        let currentMenuFile = null;
+
+        function previewMenuImage(input) {
+            const preview = document.getElementById('menuPreview');
+            const deleteBtn = document.getElementById('menuDeleteBtn');
+            if (input.files && input.files[0]) {
+                currentMenuFile = input.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    deleteBtn.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Remove image preview functions
+        function removeEventImage() {
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imageDeleteBtn').style.display = 'none';
+            document.getElementById('eventImage').value = '';
+            currentImageFile = null;
+        }
+
+        function removeMenuImage() {
+            document.getElementById('menuPreview').style.display = 'none';
+            document.getElementById('menuDeleteBtn').style.display = 'none';
+            document.getElementById('optionsMenu').value = '';
+            currentMenuFile = null;
+        }
+
+        let currentGalleryFiles = [];
+        let existingGalleryUrls = [];
+
+        function previewGalleryImages(input) {
+            const preview = document.getElementById('galleryPreview');
+            
+            if (input.files && input.files.length > 0) {
+                // Add new files to existing files (don't replace)
+                const newFiles = Array.from(input.files);
+                currentGalleryFiles = [...currentGalleryFiles, ...newFiles];
+                
+                // Re-render all previews
+                renderGalleryPreviews();
+            }
+            
+            // Clear the input so same files can be selected again if needed
+            input.value = '';
+        }
+
+        function renderGalleryPreviews() {
+            const preview = document.getElementById('galleryPreview');
+            preview.innerHTML = '';
+            
+            // Show existing images from Firebase
+            existingGalleryUrls.forEach((url, index) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.cssText = 'position: relative; border: 2px solid #4CAF50; border-radius: 5px;';
+                imgContainer.innerHTML = `
+                    <img src="${url}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 5px;">
+                    <button type="button" onclick="deleteExistingGalleryImage(${index})" style="position: absolute; top: 2px; right: 2px; background: #f44336; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: bold;">&times;</button>
+                    <span style="position: absolute; bottom: 2px; left: 2px; background: #4CAF50; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; font-weight: bold;">Saved</span>
+                `;
+                preview.appendChild(imgContainer);
+            });
+            
+            // Show new files to be uploaded
+            currentGalleryFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.cssText = 'position: relative; border: 2px solid var(--gold); border-radius: 5px;';
+                    imgContainer.innerHTML = `
+                        <img src="${e.target.result}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 5px;">
+                        <button type="button" onclick="deleteNewGalleryImage(${index})" style="position: absolute; top: 2px; right: 2px; background: #f44336; color: white; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: bold;">&times;</button>
+                        <span style="position: absolute; bottom: 2px; left: 2px; background: var(--gold); color: var(--black); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; font-weight: bold;">New</span>
+                    `;
+                    preview.appendChild(imgContainer);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function deleteNewGalleryImage(index) {
+            currentGalleryFiles.splice(index, 1);
+            renderGalleryPreviews();
+        }
+
+        async function deleteExistingGalleryImage(index) {
+            if (!confirm('Delete this image? This will remove it from Firebase Storage.')) {
+                return;
+            }
+            
+            const urlToDelete = existingGalleryUrls[index];
+            
+            try {
+                // Delete from Firebase Storage
+                const imageRef = storage.refFromURL(urlToDelete);
+                await imageRef.delete();
+                console.log('Image deleted from Firebase Storage');
+                
+                // Remove from local array
+                existingGalleryUrls.splice(index, 1);
+                renderGalleryPreviews();
+                
+                alert('Image deleted successfully');
+            } catch (error) {
+                console.error('Error deleting image:', error);
+                alert('Error deleting image: ' + error.message);
+            }
+        }
+
+        // Event Form Submit
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                // Validate banner fields if homepage banner is enabled
+                const showOnHomepage = document.getElementById('showOnHomepage').checked;
+                if (showOnHomepage) {
+                    const bannerTitle = document.getElementById('bannerTitle').value.trim();
+                    const bannerSubtitle = document.getElementById('bannerSubtitle').value.trim();
+                    
+                    if (!bannerTitle || !bannerSubtitle) {
+                        showMessage('Please fill in both Banner Title and Banner Subtitle when enabling homepage banner', 'error');
+                        return;
+                    }
+                }
+                
+                const eventDateValue = document.getElementById('eventDate').value;
+                
+                const eventData = {
+                    title: document.getElementById('eventTitle').value,
+                    description: document.getElementById('eventDescription').value,
+                    time: document.getElementById('eventTime').value,
+                    location: document.getElementById('eventLocation').value,
+                    status: document.getElementById('eventStatus').value,
+                    showOnHomepage: showOnHomepage,
+                    bannerTitle: showOnHomepage ? document.getElementById('bannerTitle').value.trim() : null,
+                    bannerSubtitle: showOnHomepage ? document.getElementById('bannerSubtitle').value.trim() : null,
+                    products: await getProductsFromForm(),
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                // Only add date if provided
+                if (eventDateValue) {
+                    eventData.date = firebase.firestore.Timestamp.fromDate(
+                        new Date(eventDateValue)
+                    );
+                }
+
+                // Upload product images
+                const productsWithImages = await uploadProductImages(eventData.products);
+                eventData.products = productsWithImages;
+
+                // Upload image if new file selected
+                if (currentImageFile) {
+                    // If updating existing event with an image, delete the old image first
+                    if (currentEventId) {
+                        try {
+                            const doc = await db.collection('events').doc(currentEventId).get();
+                            const oldData = doc.data();
+                            if (oldData && oldData.imageUrl) {
+                                const imageUrl = oldData.imageUrl;
+                                const imagePath = imageUrl.split('/o/')[1].split('?')[0];
+                                const decodedPath = decodeURIComponent(imagePath);
+                                const imageRef = storage.ref().child(decodedPath);
+                                await imageRef.delete();
+                                console.log('Old image deleted from Storage');
+                            }
+                        } catch (deleteError) {
+                            console.warn('Could not delete old image:', deleteError);
+                        }
+                    }
+                    
+                    // Upload new image
+                    const imageRef = storage.ref().child(`events/${Date.now()}_${currentImageFile.name}`);
+                    const snapshot = await imageRef.put(currentImageFile);
+                    eventData.imageUrl = await snapshot.ref.getDownloadURL();
+                }
+
+                // Upload menu image if new file selected
+                if (currentMenuFile) {
+                    // If updating existing event with a menu, delete the old menu first
+                    if (currentEventId) {
+                        try {
+                            const doc = await db.collection('events').doc(currentEventId).get();
+                            const oldData = doc.data();
+                            if (oldData && oldData.optionsMenuUrl) {
+                                const menuUrl = oldData.optionsMenuUrl;
+                                const menuPath = menuUrl.split('/o/')[1].split('?')[0];
+                                const decodedPath = decodeURIComponent(menuPath);
+                                const menuRef = storage.ref().child(decodedPath);
+                                await menuRef.delete();
+                                console.log('Old menu deleted from Storage');
+                            }
+                        } catch (deleteError) {
+                            console.warn('Could not delete old menu:', deleteError);
+                        }
+                    }
+                    
+                    // Upload new menu
+                    const menuRef = storage.ref().child(`events/menus/${Date.now()}_${currentMenuFile.name}`);
+                    const menuSnapshot = await menuRef.put(currentMenuFile);
+                    eventData.optionsMenuUrl = await menuSnapshot.ref.getDownloadURL();
+                }
+
+                // Upload gallery images if new files selected
+                if (currentGalleryFiles && currentGalleryFiles.length > 0) {
+                    const galleryUrls = [];
+                    for (const file of currentGalleryFiles) {
+                        try {
+                            const galleryRef = storage.ref().child(`events/gallery/${Date.now()}_${file.name}`);
+                            const gallerySnapshot = await galleryRef.put(file);
+                            const downloadUrl = await gallerySnapshot.ref.getDownloadURL();
+                            galleryUrls.push(downloadUrl);
+                        } catch (error) {
+                            console.error('Error uploading gallery image:', error);
+                        }
+                    }
+                    // Combine existing URLs with new ones
+                    eventData.galleryImages = [...existingGalleryUrls, ...galleryUrls];
+                } else {
+                    // Keep existing images if no new ones uploaded
+                    eventData.galleryImages = existingGalleryUrls;
+                }
+
+                if (currentEventId) {
+                    // Update existing event
+                    await db.collection('events').doc(currentEventId).update(eventData);
+                    showMessage('Event updated successfully!', 'success');
+                } else {
+                    // Create new event
+                    eventData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('events').add(eventData);
+                    showMessage('Event created successfully!', 'success');
+                }
+
+                cancelEventForm();
+                loadEvents();
+            } catch (error) {
+                showMessage('Error saving event: ' + error.message, 'error');
+            }
+        });
+
+        // Load Events
+        async function loadEvents() {
+            const eventsList = document.getElementById('eventsList');
+            
+            try {
+                // Get all events without ordering by date (since date is now optional)
+                const snapshot = await db.collection('events')
+                    .orderBy('updatedAt', 'desc')
+                    .get();
+
+                if (snapshot.empty) {
+                    eventsList.innerHTML = '<p style="text-align: center; opacity: 0.6;">No events yet. Create your first event!</p>';
+                    return;
+                }
+
+                eventsList.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const event = doc.data();
+                    eventsList.innerHTML += createEventItem(doc.id, event);
+                });
+            } catch (error) {
+                console.error('Error loading events:', error);
+                eventsList.innerHTML = '<p style="text-align: center; color: #dc3545;">Error loading events. Check console for details.</p>';
+            }
+        }
+
+        function createEventItem(id, event) {
+            const date = event.date ? new Date(event.date.seconds * 1000).toLocaleDateString('en-GB') : 'No date';
+            const statusClass = event.status === 'published' ? 'status-published' : 'status-draft';
+            
+            return `
+                <div class="event-item">
+                    <h4>${event.title}</h4>
+                    <div class="event-item-meta">
+                        <span>📅 ${date}</span>
+                        ${event.time ? `<span>🕒 ${event.time}</span>` : ''}
+                        <span class="status-badge ${statusClass}">${event.status}</span>
+                    </div>
+                    <p>${event.description.substring(0, 150)}${event.description.length > 150 ? '...' : ''}</p>
+                    <div class="event-item-actions">
+                        <button onclick="editEvent('${id}')" class="btn btn-secondary">Edit</button>
+                        <button onclick="deleteEvent('${id}')" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Edit Event
+        async function editEvent(id) {
+            try {
+                const doc = await db.collection('events').doc(id).get();
+                const event = doc.data();
+                
+                currentEventId = id;
+                document.getElementById('formTitle').textContent = 'Edit Event';
+                document.getElementById('eventTitle').value = event.title;
+                document.getElementById('eventDescription').value = event.description;
+                
+                // Handle optional date field
+                if (event.date && event.date.seconds) {
+                    document.getElementById('eventDate').value = new Date(event.date.seconds * 1000).toISOString().split('T')[0];
+                }
+                
+                document.getElementById('eventTime').value = event.time || '';
+                document.getElementById('eventLocation').value = event.location || '';
+                document.getElementById('eventStatus').value = event.status;
+                
+                // Load homepage banner data
+                if (event.showOnHomepage) {
+                    document.getElementById('showOnHomepage').checked = true;
+                    document.getElementById('bannerFieldsSection').style.display = 'block';
+                    document.getElementById('bannerTitle').value = event.bannerTitle || '';
+                    document.getElementById('bannerSubtitle').value = event.bannerSubtitle || '';
+                } else {
+                    document.getElementById('showOnHomepage').checked = false;
+                    document.getElementById('bannerFieldsSection').style.display = 'none';
+                }
+                
+                // Load products if they exist
+                document.getElementById('productsContainer').innerHTML = '';
+                productCounter = 0;
+                if (event.products && event.products.length > 0) {
+                    event.products.forEach(product => {
+                        addProductField(product);
+                    });
+                }
+                
+                if (event.imageUrl) {
+                    document.getElementById('imagePreview').src = event.imageUrl;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+
+                if (event.optionsMenuUrl) {
+                    document.getElementById('menuPreview').src = event.optionsMenuUrl;
+                    document.getElementById('menuPreview').style.display = 'block';
+                }
+
+                // Load gallery images if they exist
+                existingGalleryUrls = event.galleryImages || [];
+                currentGalleryFiles = []; // Clear new files when editing
+                renderGalleryPreviews();
+                
+                document.getElementById('eventFormContainer').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                showMessage('Error loading event: ' + error.message, 'error');
+            }
+        }
+
+        // Delete Event
+        async function deleteEvent(id) {
+            if (!confirm('Are you sure you want to delete this event? This will also delete the event image.')) return;
+            
+            try {
+                // First, get the event data to retrieve the image URL
+                const doc = await db.collection('events').doc(id).get();
+                const eventData = doc.data();
+                
+                // Delete the image from Storage if it exists
+                if (eventData && eventData.imageUrl) {
+                    try {
+                        // Extract the image path from the URL
+                        const imageUrl = eventData.imageUrl;
+                        const imagePath = imageUrl.split('/o/')[1].split('?')[0];
+                        const decodedPath = decodeURIComponent(imagePath);
+                        
+                        // Delete the image from Storage
+                        const imageRef = storage.ref().child(decodedPath);
+                        await imageRef.delete();
+                        console.log('Image deleted from Storage');
+                    } catch (imageError) {
+                        console.warn('Could not delete image:', imageError);
+                        // Continue with event deletion even if image deletion fails
+                    }
+                }
+                
+                // Delete the event from Firestore
+                await db.collection('events').doc(id).delete();
+                showMessage('Event and image deleted successfully!', 'success');
+                loadEvents();
+            } catch (error) {
+                showMessage('Error deleting event: ' + error.message, 'error');
+            }
+        }
+
+        // Show Message
+        function showMessage(message, type) {
+            const messageContainer = document.getElementById('messageContainer');
+            const className = type === 'success' ? 'success-message' : 'error-message';
+            messageContainer.innerHTML = `<div class="${className}">${message}</div>`;
+            
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        // Banner checkbox toggle
+        document.getElementById('showOnHomepage').addEventListener('change', function() {
+            const bannerFields = document.getElementById('bannerFieldsSection');
+            bannerFields.style.display = this.checked ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>

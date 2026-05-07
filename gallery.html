@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Gallery - Our Work | MK Patisserie Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Browse our gallery of custom cakes, catering displays, event styling, and workshop creations. Leicester bakery and event planning portfolio.">
+    <meta name="keywords" content="cake gallery, event portfolio, catering photos, bakery portfolio Leicester">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/gallery">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Gallery - Our Work | MK Patisserie Leicester">
+    <meta property="og:description" content="Browse our gallery of custom cakes, catering displays, event styling, and workshop creations. Leicester bakery and event planning portfolio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/gallery">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gallery - Our Work | MK Patisserie Leicester">
+    <meta name="twitter:description" content="Browse our gallery of custom cakes, catering displays, event styling, and workshop creations. Leicester bakery and event planning portfolio.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-hero {
+            min-height: 50vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.88), rgba(26, 26, 26, 0.82)),
+                        url('Images/catering/graze/graze7.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 73px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--gold);
+            color: var(--black);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-grid-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
+        }
+
+        .gallery-grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            will-change: transform;
+            content-visibility: auto;
+        }
+
+        .gallery-grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .modal-content {
+            position: relative;
+            z-index: 2001;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .gallery-grid-item {
+                height: 250px;
+            }
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="hero-content">
+            <h1 style="font-size: 4rem;">Our Moments</h1>
+            <p class="tagline">A Collection of Celebrations</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="section-inner">
+            <div class="filter-buttons">
+                <button class="filter-btn active" id="all-filter-btn" onclick="filterGallery('all')">All</button>
+                <button class="filter-btn" id="catering-filter-btn" onclick="filterGallery('catering')">Catering</button>
+                <button class="filter-btn" id="bakery-filter-btn" onclick="filterGallery('bakery')">Bakery</button>
+                <button class="filter-btn" id="cakesicles-filter-btn" onclick="filterGallery('cakesicles')">Cakesicles</button>
+                <button class="filter-btn" id="workshops-filter-btn" onclick="filterGallery('workshops')">Workshops</button>
+                <button class="filter-btn" id="drinks-filter-btn" onclick="filterGallery('drinks')">Drinks</button>
+                <button class="filter-btn" id="events-filter-btn" onclick="filterGallery('events')">Event Styling</button>
+            </div>
+
+            <div class="gallery-grid">
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle17.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew03.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake16.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/05.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze5.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake19.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew40.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event11.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake25.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery11.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/18.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew41.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake20.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake26.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/12.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake18.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento12.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/01.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/keto/mixedtreatbox.webp" alt="Keto mixed treat box" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event02.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle11.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew08.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/03.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserttable/dessert02.jpeg" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew42.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento10.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape19.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew14.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle02.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering26.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering28.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/22.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event12.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering8.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape21.webp" alt="CateringNew62" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/11.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew27.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape11.webp" alt="CateringNew05" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery09.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake27.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle16.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering30.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle05.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle15.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery01.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape01.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/02.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/12.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew05.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering31.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle14.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew07.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle12.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/Catering.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew11.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery08.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake28.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/10.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/04.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake10.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/07.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/keto/image2.webp" alt="Keto treats" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape20.webp" alt="CateringNew51" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape17.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape15.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery15.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event13.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew56.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape16.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserttable/dessert01.jpeg" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/09.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering1.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event14.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze2.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle01.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape08.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/event09.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/21.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/11.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/10.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze6.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event15.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento09.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle13.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze3.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew09.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering7.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake14.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle18.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake2.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape18.webp" alt="CateringNew45" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle10.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle19.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicles4.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape02.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape09.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery04.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake21.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew16.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento3.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/06.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/01.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze1.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake23.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cakesikle1.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake6.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento4.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/15.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento08.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/06.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering27.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/13.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/18.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento07.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/17.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle03.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/07.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape10.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/11.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/15.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake3.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake22.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering10.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape13.webp" alt="CateringNew21" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering32.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery03.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering33.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle20.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle06.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/12.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/08.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserttable/dessert04.jpeg" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/keto/chocolatecheesecakebrownie.webp" alt="Keto chocolate cheesecake brownie" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake17.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event06.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/17.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento06.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/09.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle21.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake8.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle04.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering13.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/13.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserttable/dessert03.jpeg" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bruce.webp" alt="Bruce jars" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape06.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze7.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake11.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake5.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicles5.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/14.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle07.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/23.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle08.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/event07.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/08.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event05.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle22.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering25.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/02.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/13.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake4.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape14.webp" alt="CateringNew25" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/keto/chocchipcookie.webp" alt="Keto chocolate chip cookie" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew07.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake29.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/keto/image1.webp" alt="Keto treats" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/20.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/16.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape03.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/15.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake12.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake13.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/19.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering24.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento1.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape04.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bruce1.webp" alt="Bruce jars" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/16.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento05.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event16.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/BentoNew01.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/event03.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake7.webp" alt="Custom cake" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape07.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/19.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/event10.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/14.webp" alt="Event styling balloons" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/tablescape05.webp" alt="Tablescape" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake30.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento2.webp" alt="Bento workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicle09.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering3.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew02.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/04.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+                <div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/catering29.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/event08.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/cake31.webp" alt="Bakery" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/16.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="events" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/events/balloons/03.webp" alt="Event styling" loading="lazy">
+                    <div class="gallery-category-tag">Event Styling</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/05.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento11.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento13.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento14.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento15.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento16.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento17.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento18.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento19.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento20.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento21.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento22.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento23.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento24.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento25.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento26.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="workshops" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bento/Bento27.webp" alt="Bento Workshop" loading="lazy">
+                    <div class="gallery-category-tag">Workshops</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/graze/graze4.webp" alt="Graze platter" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/14.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="cakesicles" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/cakesicles/cakesicles7.webp" alt="Cakesicles" loading="lazy">
+                    <div class="gallery-category-tag">Cakesicles</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/CateringNew30.webp" alt="Catering" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+<div class="gallery-grid-item" data-category="bakery" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/bakery/Bakery06.webp" alt="Bakery item" loading="lazy">
+                    <div class="gallery-category-tag">Bakery</div>
+                </div>
+<div class="gallery-grid-item" data-category="drinks" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/drinks/17.webp" alt="Drinks" loading="lazy">
+                    <div class="gallery-category-tag">Drinks</div>
+                </div>
+<div class="gallery-grid-item" data-category="catering" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="Images/catering/desserts/18.webp" alt="Desserts" loading="lazy">
+                    <div class="gallery-category-tag">Catering</div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button id="loadMoreBtn" class="cta-button" onclick="loadMoreImages()">Load More Images</button>
+                <p id="imageCounter" style="margin-top: 1rem; color: var(--gold); font-weight: 600;"></p>
+            </div>
+
+            
+<!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load More functionality
+        let itemsToShow = 30; // Initial number of items to show
+        let currentItemCount = 0;
+        let allItems = [];
+        let currentFilter = 'all';
+
+        function initializeGallery() {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            allItems = Array.from(galleryGrid.querySelectorAll('.gallery-grid-item'));
+            
+            // Hide all items initially
+            allItems.forEach(item => item.style.display = 'none');
+            
+            // Show initial batch
+            showItems();
+        }
+
+        function showItems() {
+            let itemsShown = 0;
+            
+            for (let i = 0; i < allItems.length && itemsShown < currentItemCount + itemsToShow; i++) {
+                const item = allItems[i];
+                const category = item.getAttribute('data-category');
+                
+                // Check if item matches current filter
+                if (currentFilter === 'all' || category === currentFilter) {
+                    if (item.style.display === 'none') {
+                        item.style.display = 'block';
+                        itemsShown++;
+                    }
+                }
+            }
+            
+            currentItemCount += itemsShown;
+            updateCounter();
+            updateLoadMoreButton();
+        }
+
+        function loadMoreImages() {
+            showItems();
+        }
+
+        function updateCounter() {
+            const visibleItems = allItems.filter(item => item.style.display === 'block').length;
+            const totalItems = currentFilter === 'all' 
+                ? allItems.length 
+                : allItems.filter(item => item.getAttribute('data-category') === currentFilter).length;
+            
+            document.getElementById('imageCounter').textContent = `Showing ${visibleItems} of ${totalItems} images`;
+        }
+
+        function updateLoadMoreButton() {
+            const visibleItems = allItems.filter(item => item.style.display === 'block').length;
+            const totalItems = currentFilter === 'all' 
+                ? allItems.length 
+                : allItems.filter(item => item.getAttribute('data-category') === currentFilter).length;
+            
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (visibleItems >= totalItems) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Override the filterGallery function from script.js to work with load more
+        const originalFilterGallery = window.filterGallery;
+        window.filterGallery = function(category) {
+            currentFilter = category;
+            currentItemCount = 0;
+            
+            // Hide all items
+            allItems.forEach(item => item.style.display = 'none');
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(category + '-filter-btn').classList.add('active');
+            
+            // Show initial batch for new filter
+            showItems();
+        };
+
+        // Initialize on page load
+        window.addEventListener('load', initializeGallery);
+
+        // Auto-click filter button if linked from another page
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('-filter-btn')) {
+                setTimeout(function() {
+                    const filterBtn = document.getElementById(hash.substring(1));
+                    if (filterBtn) {
+                        filterBtn.click();
+                        filterBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 200);
+            }
+        });
+    </script>
+</body>
+</html>

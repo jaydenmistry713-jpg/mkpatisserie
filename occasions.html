@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Special Occasions - Seasonal Treats | MK Patisserie Leicester</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Order for special occasions - Halloween, Christmas, Mother's Day, Father's Day. Custom bakery and treats for seasonal celebrations in Leicester.">
+    <meta name="keywords" content="Halloween cakes Leicester, Christmas treats, Mother's Day cakes, Father's Day gifts, seasonal bakery, occasion cakes">
+    <meta name="author" content="MK Patisserie">
+    <link rel="canonical" href="https://mkpatisserie.co.uk/occasions">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Special Occasions - Seasonal Treats | MK Patisserie Leicester">
+    <meta property="og:description" content="Order for special occasions - Halloween, Christmas, Mother's Day, Father's Day. Custom bakery and treats for seasonal celebrations in Leicester.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mkpatisserie.co.uk/occasions">
+    <meta property="og:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <meta property="og:site_name" content="MK Patisserie">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Special Occasions - Seasonal Treats | MK Patisserie Leicester">
+    <meta name="twitter:description" content="Order for special occasions - Halloween, Christmas, Mother's Day, Father's Day. Custom bakery and treats for seasonal celebrations in Leicester.">
+    <meta name="twitter:image" content="https://mkpatisserie.co.uk/logos/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <style>
+        .occasions-hero {
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.88), rgba(26,26,26,0.82)),
+                        url('Images/occassions.jpeg') center bottom/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 73px;
+        }
+
+        .occasions-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .occasions-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .occasions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .event-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            max-width: 100%;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .occasions-container {
+                padding: 2rem 0.5rem;
+            }
+
+            .event-card {
+                grid-template-columns: 1fr;
+            }
+
+            .event-image {
+                min-height: 300px;
+                max-height: 400px;
+            }
+
+            .event-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .event-date {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: var(--cream);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--cream);
+            font-size: 0.95rem;
+        }
+
+        .event-detail-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .event-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: var(--black);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .event-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .view-menu-btn {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 0.9rem 2rem;
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .view-menu-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .menu-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-modal-title {
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .menu-modal-image {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .menu-modal-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .menu-modal-close:hover {
+            transform: rotate(90deg);
+            background: var(--cream);
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--cream);
+        }
+
+        .no-events h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Event Products */
+        .event-products {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--gold);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .event-products h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .product-item-display {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .product-item-display:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .product-info {
+            color: var(--cream);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-info strong {
+            color: var(--gold);
+        }
+
+        .product-images-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+        }
+
+        /* View Gallery Button */
+        .view-gallery-btn {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 0.9rem 2rem;
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .view-gallery-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .gallery-modal-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gallery-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .gallery-modal-title {
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+        }
+
+        .gallery-modal-close {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .gallery-modal-close:hover {
+            transform: rotate(90deg);
+            background: var(--cream);
+        }
+
+        .gallery-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-modal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .gallery-modal-image:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+        }
+
+        /* Image Lightbox */
+        .image-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .image-lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .image-lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .image-lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .image-lightbox-close:hover {
+            transform: rotate(90deg);
+            background: var(--cream);
+        }
+
+        .lightbox-nav {
+            background: rgba(212, 175, 55, 0.9);
+            color: var(--black);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: none;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav.active {
+            display: block;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .products-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .products-list li {
+            padding: 0.5rem 0;
+            color: var(--cream);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .products-list li strong {
+            color: var(--gold);
+        }
+
+        /* Order Form Section */
+        .order-form-section {
+            background: rgba(26, 26, 26, 0.5);
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .occasions-form {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .occasions-form .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .occasions-form .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .occasions-form label {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .occasions-form input,
+        .occasions-form select,
+        .occasions-form textarea {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--cream);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .occasions-form input:focus,
+        .occasions-form select:focus,
+        .occasions-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .occasions-form select option {
+            background: var(--black);
+            color: var(--cream);
+        }
+
+        .occasions-form .cta-button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .occasions-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .event-card {
+                grid-template-columns: 1fr;
+            }
+
+            .event-image {
+                min-height: 250px;
+                max-height: 300px;
+            }
+
+            .event-content {
+                padding: 1.5rem;
+            }
+
+            .event-title {
+                font-size: 1.5rem;
+            }
+
+            .occasions-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .occasions-form .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            }
+        }
+
+        /* Image Lightbox from Catering Page */
+        .image-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--cream);
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10002;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.3);
+            color: var(--cream);
+            border: none;
+            font-size: 3rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10002;
+            display: none;
+        }
+
+        .lightbox-nav.active {
+            display: block;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(212, 175, 55, 0.6);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: none;
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.png" color="#D4AF37">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <style>
+        /* Success Popup Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success-modal.active {
+            display: flex;
+        }
+        
+        .success-modal-content {
+            background: var(--black);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .success-checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .success-modal h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-modal p {
+            color: var(--cream);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-modal-close {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .success-modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logos/logo.png" alt="MK Patisserie" class="logo-image">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="catering.html">Catering</a></li>
+                <li><a href="bakery.html">Bakery</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="occasions.html" class="active">Occasions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="occasions-hero">
+        <div class="hero-content">
+            <h1 style="font-size: 4rem;">Upcoming Occasions</h1>
+            <p class="tagline">Join us for seasonal celebrations and special occasions</p>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events">
+        <div class="occasions-container">
+            
+            <div id="loading" class="loading">
+                Loading events...
+            </div>
+
+            <div id="eventsGrid" class="occasions-grid" style="display: none;">
+                <!-- Events will be dynamically loaded here -->
+            </div>
+
+            <div id="noEvents" class="no-events" style="display: none;">
+                <h3>No Upcoming Events</h3>
+                <p>Check back soon for exciting seasonal events and special occasions!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Options Menu Modal -->
+    <div id="menuModal" class="menu-modal" onclick="closeMenuModal(event)">
+        <div class="menu-modal-content" onclick="event.stopPropagation()">
+            <button class="menu-modal-close" onclick="closeMenuModal()">&times;</button>
+            <h3 class="menu-modal-title" id="menuModalTitle"></h3>
+            <img id="menuModalImage" class="menu-modal-image" src="" alt="Options Menu">
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="gallery-modal" onclick="closeGalleryModal(event)">
+        <div class="gallery-modal-content" onclick="event.stopPropagation()">
+            <div class="gallery-modal-header">
+                <h3 class="gallery-modal-title" id="galleryModalTitle"></h3>
+                <button class="gallery-modal-close" onclick="closeGalleryModal()">&times;</button>
+            </div>
+            <div id="galleryModalGrid" class="gallery-modal-grid"></div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="imageLightbox" class="image-lightbox" onclick="closeImageLightbox(event)">
+        <div class="image-lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-nav" id="lightboxPrev" onclick="navigateLightbox(-1)">‹</button>
+            <img id="imageLightboxImage" class="image-lightbox-img" src="" alt="Event Image">
+            <button class="lightbox-nav" id="lightboxNext" onclick="navigateLightbox(1)">›</button>
+            <button class="image-lightbox-close" onclick="closeImageLightbox()">&times;</button>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+
+    <!-- Previous Occasions Section -->
+    <section id="previous-occasions" style="padding: 4rem 2rem; background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(42, 42, 42, 0.95));">
+        <div class="section-inner" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Previous Occasion Highlights</h2>
+            <p class="section-subtitle">A glimpse of past celebrations we've had the pleasure of creating for</p>
+            
+            <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05)); border: 2px solid var(--gold); border-radius: 15px; padding: 1.5rem; margin: 2rem auto 3rem; text-align: center; max-width: 800px;">
+                <p style="color: var(--gold); font-weight: 600; font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                    ✨ Please Note: Themes, designs, and available products vary each year and are not specific to what is shown below. These images serve as inspiration from previous years' collections.
+                </p>
+            </div>
+
+            <!-- Halloween -->
+            <div style="background: rgba(26, 26, 26, 0.6); padding: 2rem; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 2rem; text-align: center;">
+                <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; text-align: center;">Halloween</h3>
+                <p style="color: var(--cream); margin-bottom: 1.5rem; font-style: italic; text-align: center;">Spooky treats and creative designs to make your Halloween celebrations memorable</p>
+                <button class="cta-button" onclick="openOccasionModal('halloween')">View Halloween Collection (16)</button>
+            </div>
+
+            <!-- Mother's Day -->
+            <div style="background: rgba(26, 26, 26, 0.6); padding: 2rem; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 2rem; text-align: center;">
+                <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; text-align: center;">Mother's Day</h3>
+                <p style="color: var(--cream); margin-bottom: 1.5rem; font-style: italic; text-align: center;">Elegant and heartfelt creations to celebrate the special mothers in your life</p>
+                <button class="cta-button" onclick="openOccasionModal('mothers')">View Mother's Day Collection (6)</button>
+            </div>
+
+            <!-- Father's Day -->
+            <div style="background: rgba(26, 26, 26, 0.6); padding: 2rem; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 2rem; text-align: center;">
+                <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; text-align: center;">Father's Day</h3>
+                <p style="color: var(--cream); margin-bottom: 1.5rem; font-style: italic; text-align: center;">Personalized and creative designs to honor the fathers who mean the most</p>
+                <button class="cta-button" onclick="openOccasionModal('fathers')">View Father's Day Collection (14)</button>
+            </div>
+
+            <!-- Christmas -->
+            <div style="background: rgba(26, 26, 26, 0.6); padding: 2rem; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 2rem; text-align: center;">
+                <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; text-align: center;">Christmas</h3>
+                <p style="color: var(--cream); margin-bottom: 1.5rem; font-style: italic; text-align: center;">Festive delights and seasonal specialties to make your Christmas celebrations magical</p>
+                <button class="cta-button" onclick="openOccasionModal('christmas')">View Christmas Collection (20)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Occasion Image Modal -->
+    <div id="occasionModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; overflow-y: auto; padding: 2rem;">
+        <span onclick="closeOccasionModal()" style="position: fixed; top: 20px; right: 40px; color: var(--gold); font-size: 3rem; cursor: pointer; z-index: 10001;">&times;</span>
+        <div style="max-width: 1200px; margin: 4rem auto; padding: 2rem;">
+            <h3 id="occasionModalTitle" style="color: var(--gold); text-align: center; font-size: 2rem; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif;"></h3>
+            <div id="occasionModalGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+        </div>
+    </div>
+
+    <!-- Occasion Lightbox -->
+    <div id="imageLightbox" class="image-lightbox" onclick="closeImageLightbox()">
+        <span class="lightbox-close" onclick="closeImageLightbox()">&times;</span>
+        <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigateImage(-1)">&#10094;</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="imageLightboxImage" class="lightbox-image" src="" alt="">
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigateImage(1)">&#10095;</button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <script>
+        const occasionCollections = {
+            halloween: {
+                title: 'Halloween Collection',
+                images: [
+                    'Images/occassions/halloween/01.webp','Images/occassions/halloween/02.webp','Images/occassions/halloween/03.webp',
+                    'Images/occassions/halloween/04.webp','Images/occassions/halloween/05.webp','Images/occassions/halloween/06.webp',
+                    'Images/occassions/halloween/07.webp','Images/occassions/halloween/08.webp','Images/occassions/halloween/09.webp',
+                    'Images/occassions/halloween/10.webp','Images/occassions/halloween/11.webp','Images/occassions/halloween/12.webp',
+                    'Images/occassions/halloween/13.webp','Images/occassions/halloween/14.webp','Images/occassions/halloween/15.webp',
+                    'Images/occassions/halloween/16.webp'
+                ]
+            },
+            mothers: {
+                title: "Mother's Day Collection",
+                images: [
+                    'Images/occassions/mothers/01.webp','Images/occassions/mothers/02.webp','Images/occassions/mothers/03.webp',
+                    'Images/occassions/mothers/04.webp','Images/occassions/mothers/05.webp','Images/occassions/mothers/06.webp'
+                ]
+            },
+            fathers: {
+                title: "Father's Day Collection",
+                images: [
+                    'Images/occassions/fathers/01.webp','Images/occassions/fathers/02.webp','Images/occassions/fathers/03.webp',
+                    'Images/occassions/fathers/04.webp','Images/occassions/fathers/05.webp','Images/occassions/fathers/06.webp',
+                    'Images/occassions/fathers/07.webp','Images/occassions/fathers/08.webp','Images/occassions/fathers/09.webp',
+                    'Images/occassions/fathers/10.webp','Images/occassions/fathers/11.webp','Images/occassions/fathers/12.webp',
+                    'Images/occassions/fathers/13.webp','Images/occassions/fathers/14.webp'
+                ]
+            },
+            christmas: {
+                title: 'Christmas Collection',
+                images: [
+                    'Images/occassions/christmas/01.webp','Images/occassions/christmas/02.webp','Images/occassions/christmas/03.webp',
+                    'Images/occassions/christmas/04.webp','Images/occassions/christmas/05.webp','Images/occassions/christmas/06.webp',
+                    'Images/occassions/christmas/07.webp','Images/occassions/christmas/08.webp','Images/occassions/christmas/09.webp',
+                    'Images/occassions/christmas/10.webp','Images/occassions/christmas/11.webp','Images/occassions/christmas/12.webp',
+                    'Images/occassions/christmas/13.webp','Images/occassions/christmas/14.webp','Images/occassions/christmas/15.webp',
+                    'Images/occassions/christmas/16.webp','Images/occassions/christmas/17.webp','Images/occassions/christmas/18.webp',
+                    'Images/occassions/christmas/19.webp','Images/occassions/christmas/20.webp'
+                ]
+            }
+        };
+
+        function openOccasionModal(occasion) {
+            const modal = document.getElementById('occasionModal');
+            const title = document.getElementById('occasionModalTitle');
+            const grid = document.getElementById('occasionModalGrid');
+            
+            const collection = occasionCollections[occasion];
+            title.textContent = collection.title;
+            
+            grid.innerHTML = '';
+            const images = collection.images;
+            images.forEach((img, index) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = collection.title;
+                imgElement.style.cssText = 'width: 100%; height: 300px; object-fit: cover; cursor: pointer; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.3); transition: transform 0.3s ease;';
+                imgElement.onmouseover = function() { this.style.transform = 'scale(1.05)'; };
+                imgElement.onmouseout = function() { this.style.transform = 'scale(1)'; };
+                imgElement.onclick = () => openImageLightbox(img, images, index);
+                grid.appendChild(imgElement);
+            });
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOccasionModal() {
+            document.getElementById('occasionModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('occasionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeOccasionModal();
+            }
+        });
+    </script>
+
+
+    <!-- Occasions Order Form -->
+    <section id="occasions-order-form" class="order-form-section">
+        <div class="occasions-container">
+            <h2 class="section-title">Order from Our Occasions</h2>
+            <p class="section-subtitle">Select your event and choose what you'd like to order</p>
+            
+            <form name="occasions-order" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="occasions-form" id="occasionsOrderForm">
+                <!-- Honeypot -->
+                <input type="hidden" name="bot-field">
+                <input type="hidden" name="form-name" value="occasions-order">
+                
+                <!-- Hidden field for Netlify to detect product submissions -->
+                <input type="hidden" name="products" id="productsData">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orderEvent">Select Event *</label>
+                        <select id="orderEvent" name="event" required onchange="updateProductOptions()">
+                            <option value="">-- Choose an event --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="form-group">
+                    <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; display: block;">Products to Order</label>
+                    <div id="productsOrderContainer"></div>
+                    <button type="button" onclick="addProductOrder()" style="background: var(--gold); color: var(--black); border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; margin-top: 1rem;">+ Add Product</button>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orderName">Your Name *</label>
+                        <input type="text" id="orderName" name="name" required placeholder="Full Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderEmail">Email *</label>
+                        <input type="email" id="orderEmail" name="email" required placeholder="your@email.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orderPhone">Phone Number *</label>
+                        <input type="tel" id="orderPhone" name="phone" required placeholder="07XXX XXXXXX">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="orderNotes">Additional Notes / Special Requests</label>
+                    <textarea id="orderNotes" name="notes" rows="4" placeholder="Any special requests or dietary requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="cta-button">Submit Order Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MK Patisserie</div>
+        <p class="footer-tagline">Founded 2019 | Leicester, UK</p>
+        <p>Event Planning & Styling • Catering • Bakery • Workshops</p>
+        <p>&copy; 2025 MK Patisserie. All rights reserved.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+            <img src="rating.jpg" alt="5 Star Food Hygiene Rating" style="height: 50px; width: auto;">
+            <span>Nationwide Service</span>
+        </div>
+        <div class="social-links">
+            <a href="https://instagram.com/mkpatisserieltd" target="_blank">Instagram: @mkpatisserieltd</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDm72iZcExKNPMXnXReXqvy2-fHZArKPZQ",
+            authDomain: "mk-patisserie-events.firebaseapp.com",
+            projectId: "mk-patisserie-events",
+            storageBucket: "mk-patisserie-events.firebasestorage.app",
+            messagingSenderId: "863053781858",
+            appId: "1:863053781858:web:8877e7a9ebbe84e199aa3b"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        // Load events from Firebase
+        async function loadEvents() {
+            const loading = document.getElementById('loading');
+            const eventsGrid = document.getElementById('eventsGrid');
+            const noEvents = document.getElementById('noEvents');
+
+            try {
+                // Get all events first, then filter and sort in JavaScript
+                const snapshot = await db.collection('events').get();
+
+                loading.style.display = 'none';
+
+                // Filter for published events and sort by date
+                const publishedEvents = [];
+                snapshot.forEach(doc => {
+                    const event = doc.data();
+                    if (event.status === 'published') {
+                        publishedEvents.push(event);
+                    }
+                });
+
+                // Sort by date (events without dates go to the end)
+                publishedEvents.sort((a, b) => {
+                    // Events without dates go to the end
+                    if (!a.date && !b.date) return 0;
+                    if (!a.date) return 1;
+                    if (!b.date) return -1;
+                    
+                    const dateA = a.date.toDate();
+                    const dateB = b.date.toDate();
+                    return dateA - dateB;
+                });
+
+                if (publishedEvents.length === 0) {
+                    noEvents.style.display = 'block';
+                    return;
+                }
+
+                // Store events globally for form access
+                allEvents = publishedEvents;
+
+                eventsGrid.style.display = 'flex';
+                eventsGrid.innerHTML = '';
+
+                publishedEvents.forEach(event => {
+                    const eventCard = createEventCard(event);
+                    eventsGrid.innerHTML += eventCard;
+                });
+
+                // Populate order form dropdown
+                populateEventDropdown(publishedEvents);
+            } catch (error) {
+                console.error('Error loading events:', error);
+                loading.innerHTML = '<p style="color: var(--gold);">Error loading events. Please try again later.</p>';
+            }
+        }
+
+        function createEventCard(event) {
+            let dateHTML = '';
+            if (event.date && event.date.seconds) {
+                const date = new Date(event.date.seconds * 1000);
+                const formattedDate = date.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                dateHTML = `<span class="event-date">${formattedDate}</span>`;
+            }
+
+            // Build products HTML - Don't display on cards (redundant with menu)
+            let productsHTML = '';
+
+            // Build gallery images HTML - just a button
+            let galleryHTML = '';
+            if (event.galleryImages && event.galleryImages.length > 0) {
+                galleryHTML = `
+                    <button class="view-gallery-btn" onclick="openGalleryModal(${JSON.stringify(event.galleryImages).replace(/"/g, '&quot;')}, '${event.title}')">
+                        View Event Images (${event.galleryImages.length})
+                    </button>
+                `;
+            }
+
+            // Always make button scroll to order form
+            const ctaHTML = `<button class="event-cta" onclick="scrollToOrderForm('${event.title}')">Order Now</button>`;
+
+            // Add options menu button if menu image exists
+            let menuButtonHTML = '';
+            if (event.optionsMenuUrl) {
+                menuButtonHTML = `<button class="view-menu-btn" onclick="viewOptionsMenu('${event.optionsMenuUrl}', '${event.title}')">View Options Menu</button>`;
+            } else {
+                menuButtonHTML = `<div style="background: rgba(212, 175, 55, 0.1); border: 2px solid var(--gold); padding: 1rem; border-radius: 10px; text-align: center; margin-bottom: 1rem;">
+                    <p style="color: var(--gold); font-weight: 600; margin: 0;">Menu Coming Soon</p>
+                </div>`;
+            }
+
+            return `
+                <div class="event-card" data-event-title="${event.title}">
+                    ${event.imageUrl ? `<img src="${event.imageUrl}" alt="${event.title}" class="event-image">` : ''}
+                    <div class="event-content">
+                        ${dateHTML}
+                        <h3 class="event-title">${event.title}</h3>
+                        <p class="event-description">${event.description}</p>
+                        ${galleryHTML}
+                        ${productsHTML}
+                        ${event.location ? `
+                        <div class="event-details">
+                            <div class="event-detail-item">
+                                <span class="event-detail-icon">📍</span>
+                                <span>${event.location}</span>
+                            </div>
+                            ${event.time ? `
+                            <div class="event-detail-item">
+                                <span class="event-detail-icon">🕒</span>
+                                <span>${event.time}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+                        ${menuButtonHTML}
+                        ${ctaHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Store events globally for form access
+        let allEvents = [];
+
+        // Scroll to order form function
+        function scrollToOrderForm(eventTitle) {
+            const form = document.getElementById('occasions-order-form');
+            const eventSelect = document.getElementById('orderEvent');
+            
+            // Scroll to form
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Pre-select the event
+            setTimeout(() => {
+                eventSelect.value = eventTitle;
+                updateProductOptions();
+            }, 500);
+        }
+
+        // View options menu function
+        function viewOptionsMenu(menuUrl, eventTitle) {
+            const modal = document.getElementById('menuModal');
+            const modalImage = document.getElementById('menuModalImage');
+            const modalTitle = document.getElementById('menuModalTitle');
+            
+            modalTitle.textContent = `${eventTitle} - Options Menu`;
+            modalImage.src = menuUrl;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close menu modal function
+        function closeMenuModal(event) {
+            if (!event || event.target.id === 'menuModal') {
+                const modal = document.getElementById('menuModal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMenuModal();
+                closeImageLightbox();
+                closeGalleryModal();
+            } else if (event.key === 'ArrowLeft' && currentGalleryImages.length > 0) {
+                navigateLightbox(-1);
+            } else if (event.key === 'ArrowRight' && currentGalleryImages.length > 0) {
+                navigateLightbox(1);
+            }
+        });
+
+        // Gallery Modal functions
+        function openGalleryModal(images, title) {
+            const modal = document.getElementById('galleryModal');
+            const modalTitle = document.getElementById('galleryModalTitle');
+            const modalGrid = document.getElementById('galleryModalGrid');
+            
+            modalTitle.textContent = `${title} - Event Gallery`;
+            modalGrid.innerHTML = '';
+            
+            images.forEach((img, index) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = title;
+                imgElement.className = 'gallery-modal-image';
+                imgElement.onclick = () => openImageLightbox(img, images, index);
+                modalGrid.appendChild(imgElement);
+            });
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGalleryModal(event) {
+            if (!event || event.target.id === 'galleryModal') {
+                const modal = document.getElementById('galleryModal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Image lightbox with navigation
+        let currentGalleryImages = [];
+        let currentImageIndex = 0;
+
+        function openImageLightbox(imageUrl, galleryImages = null, startIndex = 0) {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImage = document.getElementById('imageLightboxImage');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+            const counter = document.getElementById('lightboxCounter');
+            
+            if (galleryImages && galleryImages.length > 1) {
+                currentGalleryImages = galleryImages;
+                currentImageIndex = startIndex;
+                prevBtn.classList.add('active');
+                nextBtn.classList.add('active');
+                counter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+                counter.style.display = 'block';
+            } else {
+                currentGalleryImages = [];
+                currentImageIndex = 0;
+                prevBtn.classList.remove('active');
+                nextBtn.classList.remove('active');
+                counter.style.display = 'none';
+            }
+            
+            lightboxImage.src = imageUrl;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function navigateLightbox(direction) {
+            if (currentGalleryImages.length === 0) return;
+            
+            currentImageIndex += direction;
+            
+            // Loop around
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentGalleryImages.length - 1;
+            } else if (currentImageIndex >= currentGalleryImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            const lightboxImage = document.getElementById('imageLightboxImage');
+            const counter = document.getElementById('lightboxCounter');
+            
+            lightboxImage.src = currentGalleryImages[currentImageIndex];
+            counter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+        }
+
+        function closeImageLightbox(event) {
+            if (!event || event.target.id === 'imageLightbox') {
+                const lightbox = document.getElementById('imageLightbox');
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                currentGalleryImages = [];
+                currentImageIndex = 0;
+            }
+        }
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.getElementById('imageLightbox').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('imageLightbox').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (currentGalleryImages.length === 0) return;
+            
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left - next image
+                navigateLightbox(1);
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Swipe right - previous image
+                navigateLightbox(-1);
+            }
+        }
+
+        // Update product dropdown based on selected event
+        let productOrderCounter = 0;
+        let selectedEvent = null;
+
+        function addProductOrder() {
+            if (!selectedEvent) {
+                alert('Please select an event first');
+                return;
+            }
+
+            if (!selectedEvent.products || selectedEvent.products.length === 0) {
+                alert('This event has no products available');
+                return;
+            }
+
+            productOrderCounter++;
+            const container = document.getElementById('productsOrderContainer');
+            
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product-order-item';
+            productDiv.id = `productOrder-${productOrderCounter}`;
+            productDiv.style.cssText = 'background: rgba(26, 26, 26, 0.8); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--gold); margin-bottom: 1rem; position: relative;';
+            
+            productDiv.innerHTML = `
+                <button type="button" onclick="removeProductOrder(${productOrderCounter})" style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-weight: bold;">×</button>
+                
+                <h4 style="color: var(--gold); margin-bottom: 1rem;">Product ${productOrderCounter}</h4>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Select Product *</label>
+                        <select required onchange="updateProductSizeOptions(${productOrderCounter})" class="product-select">
+                            <option value="">-- Choose a product --</option>
+                            ${selectedEvent.products.map((product, index) => 
+                                `<option value="${product.name}" data-index="${index}">${product.name}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group size-container">
+                        <label>Select Size *</label>
+                        <select required class="size-select" id="sizeSelect-${productOrderCounter}">
+                            <option value="">-- Choose size --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="flavorContainer-${productOrderCounter}" style="display: none; margin-top: 1rem;">
+                    <div class="form-group">
+                        <label>Select Flavor *</label>
+                        <select class="flavor-select" id="flavorSelect-${productOrderCounter}" style="width: 100%; padding: 0.75rem; background: rgba(26, 26, 26, 0.8); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: var(--cream);">
+                            <option value="">-- Choose flavor --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Quantity *</label>
+                        <input type="number" min="1" value="1" required style="width: 100%; padding: 0.75rem; background: rgba(26, 26, 26, 0.8); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: var(--cream);">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(productDiv);
+        }
+
+        function removeProductOrder(id) {
+            const productDiv = document.getElementById(`productOrder-${id}`);
+            if (productDiv) {
+                productDiv.remove();
+            }
+        }
+
+        function updateProductSizeOptions(orderNum) {
+            const productSelect = document.querySelector(`#productOrder-${orderNum} .product-select`);
+            const sizeContainer = document.querySelector(`#productOrder-${orderNum} .size-container`);
+            const sizeSelect = document.getElementById(`sizeSelect-${orderNum}`);
+            const flavorContainer = document.getElementById(`flavorContainer-${orderNum}`);
+            const flavorSelect = document.getElementById(`flavorSelect-${orderNum}`);
+            
+            // Reset sizes
+            sizeSelect.innerHTML = '<option value="">-- Choose size --</option>';
+            
+            // Hide flavor options by default and remove required
+            if (flavorContainer) {
+                flavorContainer.style.display = 'none';
+                if (flavorSelect) {
+                    flavorSelect.removeAttribute('required');
+                }
+            }
+            
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            if (!selectedOption || !selectedOption.value) {
+                if (sizeContainer) sizeContainer.style.display = 'block';
+                return;
+            }
+            
+            const productIndex = parseInt(selectedOption.dataset.index);
+            const product = selectedEvent.products[productIndex];
+            
+            let sizeCount = 0;
+            
+            // Add size options based on available prices (in order: Mini, Small, Large)
+            if (product.priceMini) {
+                const option = document.createElement('option');
+                option.value = `Mini - £${product.priceMini}`;
+                option.textContent = `Mini - £${product.priceMini}`;
+                sizeSelect.appendChild(option);
+                sizeCount++;
+            }
+            
+            if (product.priceSmall) {
+                const option = document.createElement('option');
+                option.value = `Small - £${product.priceSmall}`;
+                option.textContent = `Small - £${product.priceSmall}`;
+                sizeSelect.appendChild(option);
+                sizeCount++;
+            }
+            
+            if (product.priceLarge) {
+                const option = document.createElement('option');
+                option.value = `Large - £${product.priceLarge}`;
+                option.textContent = `Large - £${product.priceLarge}`;
+                sizeSelect.appendChild(option);
+                sizeCount++;
+            }
+            
+            // If only one size, hide the size dropdown and auto-select it
+            if (sizeCount === 1) {
+                sizeSelect.selectedIndex = 1;
+                sizeSelect.removeAttribute('required');
+                if (sizeContainer) {
+                    sizeContainer.style.display = 'none';
+                }
+            } else if (sizeCount > 1) {
+                // Show size dropdown if multiple sizes
+                sizeSelect.setAttribute('required', 'required');
+                if (sizeContainer) {
+                    sizeContainer.style.display = 'block';
+                }
+            }
+            
+            // Show flavor options if product has flavors
+            if (product.flavors && product.flavors.length > 0) {
+                flavorSelect.innerHTML = '<option value="">-- Choose flavor --</option>';
+                product.flavors.forEach(flavor => {
+                    const option = document.createElement('option');
+                    option.value = flavor;
+                    option.textContent = flavor;
+                    flavorSelect.appendChild(option);
+                });
+                flavorContainer.style.display = 'block';
+                flavorSelect.setAttribute('required', 'required');
+            }
+        }
+
+        function updateProductOptions() {
+            const eventSelect = document.getElementById('orderEvent');
+            const container = document.getElementById('productsOrderContainer');
+            
+            // Clear existing products
+            container.innerHTML = '';
+            productOrderCounter = 0;
+            
+            const selectedEventTitle = eventSelect.value;
+            if (!selectedEventTitle) {
+                selectedEvent = null;
+                return;
+            }
+            
+            // Find the selected event
+            selectedEvent = allEvents.find(e => e.title === selectedEventTitle);
+            
+            if (!selectedEvent || !selectedEvent.products || selectedEvent.products.length === 0) {
+                container.innerHTML = '<p style="color: var(--gold); text-align: center; padding: 1rem;">No products available for this event</p>';
+                return;
+            }
+            
+            // Automatically add first product selection
+            addProductOrder();
+        }
+
+        // Handle form submission - collect product data
+        document.getElementById('occasionsOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default submission
+            
+            console.log('Form submitting, collecting product data...');
+            
+            // Collect all product data
+            const productOrders = [];
+            const productOrderDivs = document.querySelectorAll('.product-order-item');
+            
+            console.log(`Found ${productOrderDivs.length} product order(s)`);
+            
+            productOrderDivs.forEach((div, idx) => {
+                const productSelect = div.querySelector('.product-select');
+                const sizeSelect = div.querySelector('.size-select');
+                const flavorSelect = div.querySelector('.flavor-select');
+                const quantityInput = div.querySelector('input[type="number"]');
+                
+                const productName = productSelect?.value;
+                const size = sizeSelect?.value;
+                const flavor = flavorSelect?.value;
+                const quantity = quantityInput?.value;
+                
+                console.log(`Product ${idx + 1}:`, { productName, size, flavor, quantity });
+                
+                if (productName) {
+                    const productOrder = {
+                        product: productName,
+                        size: size || 'N/A',
+                        quantity: quantity || '1'
+                    };
+                    
+                    if (flavor) {
+                        productOrder.flavor = flavor;
+                    }
+                    
+                    productOrders.push(productOrder);
+                }
+            });
+            
+            // Format products as readable text for email notification
+            let productsText = '';
+            if (productOrders.length === 0) {
+                productsText = 'No products selected';
+            } else {
+                productOrders.forEach((order, index) => {
+                    productsText += `${index + 1}. ${order.product}`;
+                    if (order.size !== 'N/A') productsText += ` - ${order.size}`;
+                    if (order.flavor) productsText += ` - Flavor: ${order.flavor}`;
+                    productsText += ` - Quantity: ${order.quantity}\n`;
+                });
+            }
+            
+            console.log('Products text:', productsText);
+            
+            // Set the hidden field value
+            document.getElementById('productsData').value = productsText;
+            
+            console.log('Products data set to hidden field');
+            
+            // Submit to Netlify
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                console.log('Form submitted successfully');
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+                // Clear event selection
+                selectedEvent = null;
+                document.getElementById('eventSelection').style.display = 'block';
+                document.getElementById('orderFormSection').style.display = 'none';
+            })
+            .catch((error) => {
+                // Even on "error", form likely submitted (Netlify redirect causes CORS error)
+                console.log('Fetch error (likely success):', error);
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            });
+        });
+
+        // Populate event dropdown when events load
+        function populateEventDropdown(events) {
+            const eventSelect = document.getElementById('orderEvent');
+            eventSelect.innerHTML = '<option value="">-- Choose an event --</option>';
+            
+            // Only add events that have products
+            const eventsWithProducts = events.filter(e => e.products && e.products.length > 0);
+            
+            eventsWithProducts.forEach(event => {
+                const option = document.createElement('option');
+                option.value = event.title;
+                option.textContent = event.title;
+                eventSelect.appendChild(option);
+            });
+        }
+
+        // Load events when page loads
+        window.addEventListener('DOMContentLoaded', loadEvents);
+    </script>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-checkmark"></div>
+            
+            <h2>Enquiry Sent!</h2>
+            
+            <p>Thank you for contacting MK Patisserie.</p>
+            <p>We've received your enquiry and will aim to get back to you within <strong style="color: var(--gold);">48 hours</strong>.</p>
+            <p style="font-size: 1rem; opacity: 0.9; margin-top: 1rem;">We look forward to speaking with you soon!</p>
+            
+            <button class="success-modal-close" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Success modal functions
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSuccessModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
