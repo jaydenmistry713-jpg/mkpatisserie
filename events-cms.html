@@ -405,6 +405,22 @@
         }
 
         @media (max-width: 768px) {
+            .cms-container {
+                padding: 0.75rem;
+            }
+
+            .cms-header {
+                padding: 1.25rem;
+            }
+
+            .cms-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .event-form {
+                padding: 1rem;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
             }
@@ -415,6 +431,10 @@
 
             .event-item-actions {
                 flex-direction: column;
+            }
+
+            .product-item {
+                padding: 1rem;
             }
 
             .product-row {
@@ -755,19 +775,39 @@
                         <label>Product Name *</label>
                         <input type="text" class="product-name" placeholder="e.g., Sunnah Graze Platters" value="${product?.name || ''}" required>
                     </div>
-                    <div class="form-group">
-                        <label>Mini Price (£) - Optional</label>
-                        <input type="number" class="product-price-mini" placeholder="15.00" step="0.01" min="0" value="${product?.priceMini || ''}">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.5rem, 2vw, 1rem); margin-bottom: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Size 1 Name</label>
+                            <input type="text" class="product-size-name-1" placeholder="e.g., Individual, 6-inch, Bronze" value="${product?.sizes?.[0]?.name || ''}">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Price (£)</label>
+                            <input type="number" class="product-size-price-1" placeholder="15.00" step="0.01" min="0" value="${product?.sizes?.[0]?.price || ''}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Small Price (£) - Optional</label>
-                        <input type="number" class="product-price-small" placeholder="25.00" step="0.01" min="0" value="${product?.priceSmall || ''}">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.5rem, 2vw, 1rem); margin-bottom: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Size 2 Name</label>
+                            <input type="text" class="product-size-name-2" placeholder="e.g., Sharing, 9-inch, Silver" value="${product?.sizes?.[1]?.name || ''}">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Price (£)</label>
+                            <input type="number" class="product-size-price-2" placeholder="25.00" step="0.01" min="0" value="${product?.sizes?.[1]?.price || ''}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Large Price (£) - Optional</label>
-                        <input type="number" class="product-price-large" placeholder="35.00" step="0.01" min="0" value="${product?.priceLarge || ''}">
-                        <small style="font-size: 0.8rem; opacity: 0.7;">Enter at least one price</small>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.5rem, 2vw, 1rem); margin-bottom: 0.5rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Size 3 Name</label>
+                            <input type="text" class="product-size-name-3" placeholder="e.g., Party, 12-inch, Gold" value="${product?.sizes?.[2]?.name || ''}">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Price (£)</label>
+                            <input type="number" class="product-size-price-3" placeholder="35.00" step="0.01" min="0" value="${product?.sizes?.[2]?.price || ''}">
+                        </div>
                     </div>
+                    <small style="font-size: 0.8rem; opacity: 0.7; display: block; margin-top: 0.5rem;">Enter both a size name and price. Leave blank if not needed. At least one size is required.</small>
                 </div>
                 <div class="form-group">
                     <label>Flavor Options (Optional)</label>
@@ -856,18 +896,24 @@
             
             for (const item of productItems) {
                 const name = item.querySelector('.product-name').value;
-                const priceMini = parseFloat(item.querySelector('.product-price-mini').value) || null;
-                const priceSmall = parseFloat(item.querySelector('.product-price-small').value) || null;
-                const priceLarge = parseFloat(item.querySelector('.product-price-large').value) || null;
+                const sizes = [];
+                for (let i = 1; i <= 3; i++) {
+                    const sizeName = item.querySelector(`.product-size-name-${i}`).value.trim();
+                    const sizePrice = parseFloat(item.querySelector(`.product-size-price-${i}`).value);
+                    if (sizeName && !isNaN(sizePrice) && sizePrice > 0) {
+                        sizes.push({ name: sizeName, price: sizePrice });
+                    }
+                }
                 const imageInput = item.querySelector('.product-images');
                 const flavorsText = item.querySelector('.product-flavors').value;
-                
+
                 if (name) {
+                    if (sizes.length === 0) {
+                        throw new Error('Please add at least one size with both a name and price for each product');
+                    }
                     const product = {
                         name,
-                        priceMini,
-                        priceSmall,
-                        priceLarge,
+                        sizes,
                         imageFiles: imageInput?.files ? Array.from(imageInput.files).slice(0, 3) : [],
                         // Preserve existing images if editing
                         existingImages: []
@@ -904,9 +950,7 @@
             for (const product of products) {
                 const productData = {
                     name: product.name,
-                    priceMini: product.priceMini,
-                    priceSmall: product.priceSmall,
-                    priceLarge: product.priceLarge,
+                    sizes: product.sizes,
                     images: product.existingImages || []
                 };
                 
@@ -1278,7 +1322,18 @@
                 document.getElementById('productsContainer').innerHTML = '';
                 productCounter = 0;
                 if (event.products && event.products.length > 0) {
-                    event.products.forEach(product => {
+                    // Convert old priceMini/Small/Large format to sizes array for backward compatibility
+                    const normalised = event.products.map(product => {
+                        if (!product.sizes && (product.priceMini !== undefined || product.priceSmall !== undefined || product.priceLarge !== undefined)) {
+                            const sizes = [];
+                            if (product.priceMini != null) sizes.push({ name: 'Mini', price: product.priceMini });
+                            if (product.priceSmall != null) sizes.push({ name: 'Small', price: product.priceSmall });
+                            if (product.priceLarge != null) sizes.push({ name: 'Large', price: product.priceLarge });
+                            return Object.assign({}, product, { sizes });
+                        }
+                        return product;
+                    });
+                    normalised.forEach(product => {
                         addProductField(product);
                     });
                 }
